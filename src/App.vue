@@ -1,74 +1,74 @@
 <template>
-  <Header :header="this.header" />
-  <div class="content-container">
-    <section class="section-container" id="missions" style="width:435px; height:714px;">
-      <div class="section-header clipped-medium-backward">
-        <img src="/icons/mission-icon.svg" />
-        <h1>Mission Log</h1>
+  <div id="app">
+    <Header :header="header" />
+    <v-container>
+      <div class="content-container">
+            <section class="section-container" id="missions" :style="missionSectionStyle">
+              <div class="section-header clipped-medium-backward">
+                <img src="/icons/mission-icon.svg" />
+                <h1>Missões</h1>
+              </div>
+              <div class="section-content-container">
+                <h3>Objetivo Atual</h3>
+                <Markdown :source="current_md" class="markdown" />
+                <h3>Lista de Missões</h3>
+                <div class="mission-list-container">
+                  <Mission
+                    v-for="item in this.missions"
+                    :key="item.slug"
+                    :mission="item"
+                    :selected="this.mission_slug"
+                    @click="selectMission(item)"
+                  />
+                </div>
+              </div>
+            </section>
+     
+            <section class="section-container" id="events" :style="eventsSectionStyle">
+              <div class="section-header clipped-medium-backward">
+                <img src="/icons/events-icon.svg" />
+                <h1>Eventos da missão</h1>
+              </div>
+              <div class="section-content-container">
+                <Markdown :source="events" class="markdown" />
+              </div>
+            </section>
+         
+            <section class="section-container" id="pilots" :style="pilotsSectionStyle">
+              <div style="height:52px; overflow:hidden;">
+                <div class="section-header clipped-medium-backward-pilot">
+                  <img src="/icons/pilot-icon.svg" />
+                  <h1>Pilotos</h1>
+                </div>
+                <div class="rhombus-back">&nbsp;</div>
+              </div>
+              <div class="section-content-container">
+                <div class="pilot-list-container">
+                  <Pilot v-for="item in this.pilots" :key="item.slug" :pilot="item" />
+                </div>
+              </div>
+            </section>
       </div>
-      <div class="section-content-container">
-        <h3>Current Assignment</h3>
-        <Markdown :source="current_md" class="markdown" />
-        <h3>Mission List</h3>
-        <div class="mission-list-container">
-          <Mission
-            v-for="item in this.missions"
-            :key="item.slug"
-            :mission="item"
-            :selected="this.mission_slug"
-            @click="selectMission(item)"
-          />
-        </div>
-      </div>
-    </section>
-    <section class="section-container" id="events" style="width:435px; height:714px;">
-      <div class="section-header clipped-medium-backward">
-        <img src="/icons/events-icon.svg" />
-        <h1>Events Log</h1>
-      </div>
-      <div class="section-content-container">
-        <Markdown :source="events" class="markdown" />
-      </div>
-    </section>
-    <section class="section-container" id="pilots" style="width:894px; height:714px;">
-      <div style="height:52px; overflow:hidden;">
-        <div class="section-header clipped-medium-backward-pilot">
-          <img src="/icons/pilot-icon.svg" />
-          <h1>Pilot Roster</h1>
-        </div>
-        <div class="rhombus-back">&nbsp;</div>
-      </div>
-      <div class="section-content-container">
-        <div class="pilot-list-container">
-          <Pilot v-for="item in this.pilots" :key="item.slug" :pilot="item" />
-        </div>
-      </div>
-    </section>
+      <svg style="visibility: hidden; position: relative;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="round">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -5"
+              result="goo"
+            />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+        </defs>
+      </svg>
+      <audio autoplay>
+        <source src="/startup.ogg" type="audio/ogg" />
+      </audio>
+    </v-container>
+    <Footer/>
   </div>
-  <svg
-    style="visibility: hidden; position: absolute;"
-    width="0"
-    height="0"
-    xmlns="http://www.w3.org/2000/svg"
-    version="1.1"
-  >
-    <defs>
-      <filter id="round">
-        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-        <feColorMatrix
-          in="blur"
-          mode="matrix"
-          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -5"
-          result="goo"
-        />
-        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-      </filter>
-    </defs>
-  </svg>
-  <audio autoplay>
-    <source src="/startup.ogg" type="audio/ogg" />
-  </audio>
-  <Footer/>
 </template>
 
 <script>
@@ -89,21 +89,46 @@ export default {
 
   data() {
     return {
-      "mission_slug": "001",
+      "mission_slug": "000",
       "current_md": "",
       "events": "",
       "missions": [
         {
-          "slug": "001",
-          "name": "Bug-Hunt",
+  "slug": "001",
+          "name": "Bug Hunt",
           "status": "start"
         },
+//         {  
+// "slug": "002",
+//           "name": "Vigilant Gaze",
+//           "status": "partial-success"
+//         },
+//        {  
+// "slug": "003",
+//           "name": "Floodgate",
+//           "status": "success"
+//         },
+//           {  
+// "slug": "004A",
+//           "name": "Last Castle",
+//           "status": "success"
+//         },
+//           {  
+// "slug": "004B",
+//           "name": "Rallying Cry",
+//           "status": "success"
+//         },
+//         {
+// "slug": "005",
+//           "name": "Counter-Punch",
+//           "status": "success"
+//         },
       ],
       "pilots": [
         {
-          "callsign": "Emerald Green",
+         "callsign": "Emerald Green",
           "alias": "Philias Markat",
-          "code": "Union Administrative RM-4 Pilot Identification Protocol (IDENT) Record 91ac7f11-111f-46e0-af5d-6bd122969cc5  Markat.Philias:91ac7f11-111f-46e0-af5d-6bd122969cc5//NDL-C-BLUE-SKY",
+          "code": "91ac7f11-111f-46e0-af5d-6bd122969cc5  Markat.Philias:91ac7f11-111f-46e0-af5d-6bd122969cc5//NDL-C-BLUE-SKY",
           "corpro": "GMS",
           "frame": "Everest",
           "mech": "Kakyu"
@@ -113,12 +138,12 @@ export default {
         "planet": "Hercynia",
         "year": "5014u",
         "system": "Ardennes-3",
-        "gate": "Atlas-Quanokrim",
-        "ring": "Atlas-Line",
-        "headerTitle": "Mirrorsmoke",
-        "headerSubtitle": "Mercenary Company",
-        "subheaderTitle": "Crisis Response",
-        "subheaderSubtitle": "Delta-Echo-Echo-Zulu",
+        "gate": "Atlas-Quanoukrim",
+        "ring": "Atlas",
+        "headerTitle": "DEPARTAMENTO NAVAL DA UNIÃO",
+        "headerSubtitle": " ",
+        "subheaderTitle": "Força de Resposta Rápida",
+        "subheaderSubtitle": "Bad Juju",
       },
       "options":{
         "eventsMarkdownPerMission": true
@@ -172,15 +197,137 @@ export default {
       client.send();
     }
   }
-
 }
 </script>
 
-
 <style lang="scss">
 #app {
-  width: 1902px;
-  height: 910px;
-  overflow: hidden;
+  position: relative;
+   width: 100vw; /* Use viewport width */
+  height: 100vh; /* Use viewport height */
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+ }
+  .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999; /* Adjust the z-index value as needed */
 }
+.container {
+  display: flex;
+   flex-wrap: wrap;
+   flex-basis: 50%;
+  justify-content: center;
+}
+
+.section {
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+  .col-mobile {
+  width: 100%;
+}
+
+  @media (max-width: 767px) {
+  /* Styles for mobile devices */
+
+ #app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .content-container {
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: flex;
+    max-width: 1000px; /* Set a maximum width for the content container */
+    width: 100%; /* Set the initial width to 100% */
+    padding: 3em;
+    box-sizing: border-box;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  #missions,
+  #events,
+  #pilots {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .section {
+    flex: 1 1 100%;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .section-header img {
+    max-width: 50px;
+    margin-right: 10px;
+  }
+
+ .section-container {
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .section-content-container {
+    padding: 10px;
+  }
+
+  .pilot-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+.section-container {
+  #pilots {
+    height: 34px;
+    overflow: hidden;
+  }
+}
+  .markdown {
+    /* Styles for Markdown content */
+  }
+
+  .missions {
+    flex-basis: 100%;
+    order: 1;
+  }
+
+  .events {
+    flex-basis: 100%;
+    order: 2;
+  }
+
+  .pilots {
+    flex-basis: 100%;
+    order: 3;
+  }
+  #pilots .section-header.clipped-medium-backward {
+    height: 86px;
+    overflow-y: hidden;
+  margin-bottom: -61px;
+  }
+  }
 </style>
