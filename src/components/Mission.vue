@@ -1,7 +1,7 @@
 <template>
 	<div class="mission" :class="[{ active: isActive }, this.mission.status]">
 		<div class="name">
-			<h1>Mission // {{ mission.slug }}</h1>
+			<h1>Missão // {{ mission.slug }}</h1>
 			<h2>{{ mission.name }}</h2>
 		</div>
 		<div class="status" :class="this.mission.status">
@@ -30,10 +30,10 @@ export default {
 			return `/icons/mission-${this.mission.status}.svg`
 		},
 		missionStatus() {
-			if (this.mission.status === "start") return "Current\nBriefing"
-			if (this.mission.status === "partial-success") return "Partial\nSuccess"
-			if (this.mission.status === "success") return "Mission\nSuccess"
-			if (this.mission.status === "failure") return "Mission\nFailure"
+			if (this.mission.status === "start") return "Missão em\nProgresso"
+			if (this.mission.status === "partial-success") return "Sucesso\nParcial"
+			if (this.mission.status === "success") return "Sucesso"
+			if (this.mission.status === "failure") return "Falha"
 		},
 		isActive() {
 			return this.mission.slug === this.selected;
