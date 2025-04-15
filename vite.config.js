@@ -1,16 +1,14 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
+// https://vitejs.dev/config/
 export default defineConfig({
-  base: './',
-  build: {
-    rollupOptions: {
-      input: {
-        main: 'src/main.js',
-      },
-      external: [],
+  plugins: [vue()],
+  base: "./",
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
     },
-    outDir: 'dist',
-    assetsDir: '.',
-    chunkFileNames: 'assets/[name]-[hash].js',
-  },
+  }
 });
