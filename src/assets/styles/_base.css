@@ -9,32 +9,32 @@
 /*-------------------------------------*/
 :root {
 	/* Primary Colors */
-	--primary-color: #7dbbbb;
-	--secondary-color: #161c1dcc;
-	--highlight-hover: rgba(255, 255, 255, 0.3);
-	--highlight-active: rgba(255, 255, 255, 0.1);
+	--primary-color: rgba(153, 30, 42, 1);
+	--secondary-color: rgba(255, 255, 255, 1);
+	--highlight-hover: rgba(153, 0, 0, 0.3);
+	--highlight-active: rgba(0, 0, 0, 0.1);
 	/* Primary Text */
 	--text-headers: rgba(0, 0, 0, 1);
-	--text-location: rgba(255, 255, 255, 0.87);
+	--text-location: rgba(0, 0, 0, 0.87);
 	/* Location Information */
-	--location-separator: rgba(255, 255, 255, 0.24);
+	--location-separator: rgba(0, 0, 0, 0.24);
 	/* Mission Pane */
-	--text-mission-title: rgba(255, 255, 255, 0.67);
-	--text-mission-status: rgba(255, 255, 255, 0.87);
+	--text-mission-title: rgba(0, 0, 0, 0.67);
+	--text-mission-status: rgba(0, 0, 0, 0.87);
 	--mission-start: rgba(109, 109, 109, 1);
 	--mission-partial: rgba(88, 34, 102, 1);
-	--mission-success: #226662;
+	--mission-success: rgba(34, 102, 98, 1);
 	--mission-failure: rgba(176, 45, 45, 1);
-	--primary-logo: #0C3C40;
-	--secondary-logo: #146464;
+	--primary-logo: rgba(255, 255, 255, 1);
+	--secondary-logo:rgba(255, 255, 255, 1);
 	/* Pilot Roster Text */
-	--text-pilot-header: rgba(255, 255, 255, 0.67);
-	--text-pilot-value: rgba(255, 255, 255, 0.87);
-	--text-pilot-code: rgba(255, 255, 255, 0.47);
+	--text-pilot-header: rgba(0, 0, 0, 0.67);
+	--text-pilot-value: rgba(0, 0, 0, 0.87);
+	--text-pilot-code: rgba(0, 0, 0, 0.70);
 	/* Markdown (Current Assignment, Events Log, Pilot Biography) */
-	--text-markdown-p: rgba(255, 255, 255, 0.87);
-	--text-markdown-h1: rgba(255, 255, 255, 0.67);
-	--text-markdown-h2: rgba(255, 255, 255, 0.87);
+	--text-markdown-p: rgba(0, 0, 0, 0.87);
+	--text-markdown-h1: rgba(0, 0, 0, 0.67);
+	--text-markdown-h2: rgba(0, 0, 0, 0.87);
 
 	/* For Firefox */
 	scrollbar-color: var(--primary-color) transparent !important;
@@ -105,6 +105,7 @@ header {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.15em;
+	color: var(--secondary-color);
 }
 
 .title #title-subheader {
@@ -116,6 +117,7 @@ header {
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
 	padding-left: 0.32em;
+	color: var(--secondary-color);
 }
 
 .title #subtitle-header {
@@ -126,6 +128,7 @@ header {
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
+	color: var(--secondary-color);
 }
 
 .title #subtitle-subheader {
@@ -136,6 +139,7 @@ header {
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
+	color: var(--secondary-color);
 }
 
 .logo {
@@ -298,7 +302,7 @@ div.location-info {
 	align-items: center;
 	margin-bottom: 1em;
 	text-decoration: none;
-	color: var(--text-headers);
+	color: var(--secondary-color);
 }
 
 .sidebar-layout a.router-link-exact-active {
@@ -311,7 +315,7 @@ div.location-info {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background: white;
+	background: rgba(250, 72, 72, 0.452);
 	margin-bottom: 1em;
 	text-decoration: none;
 }
@@ -415,6 +419,7 @@ section .section-header h1 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--secondary-color);
 }
 
 .section-content-container {
@@ -1552,7 +1557,7 @@ div.markdown ol li {
 
 .pilot-identity .header {
 	background: var(--primary-color);
-	color: var(--text-headers);
+	color: var(--secondary-color);
 	font-size: 32px;
 	margin: 0%;
 	align-self: center;
@@ -1582,7 +1587,7 @@ div.markdown ol li {
 	border-radius: 5px;
 	border-top-left-radius: 0px;
 	border-top-right-radius: 0px;
-	background-color: rgba(22, 28, 29, 1);
+	background-color: var(--secondary-color);
 	font-family: "Inconsolata", monospace;
 	font-weight: 400;
 	line-height: 1.25em;

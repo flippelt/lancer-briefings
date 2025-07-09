@@ -1,9 +1,9 @@
 {
   "initialSlug": "001",
-  "planetPath": "/planet.webm",
+  "planetPath": "/public_planet.webm",
   "animate": true,
-  "defaultTitle": "MSMC |",
-  "icon": "/faction-logos/msmc.svg",
+  "defaultTitle": "UN |",
+  "icon": "/faction-logos/union-white.svg",
   "header": {
     "planet": "Heiligtum-6 'Deep Blue'",
     "year": "5017u",
