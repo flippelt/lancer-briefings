@@ -5,15 +5,15 @@
   "defaultTitle": "UN |",
   "icon": "/faction-logos/union-white.svg",
   "header": {
-    "planet": "Heiligtum-6 'Deep Blue'",
-    "year": "5017u",
-    "system": "Heiligtum",
-    "gate": "Rào Cỏ",
-    "ring": "Annamite",
-    "headerTitle": "Mirrorsmoke",
-    "headerSubtitle": "Mercenary Company",
-    "subheaderTitle": "Contract Work",
-    "subheaderSubtitle": "Sierra-Whiskey-Alpha-Golf"
+    "planet": "Hercynia",
+    "year": "5014u",
+    "system": "Ardennes-3",
+    "gate": "Atlas-Quanoukrim",
+    "ring": "Atlas",
+    "headerTitle": "Departamento Naval da União",
+    "headerSubtitle": "",
+    "subheaderTitle": "Time de Resposta Rápida",
+    "subheaderSubtitle": "Bad Juju"
   },
   "pilotSpecialInfo": {}
 }

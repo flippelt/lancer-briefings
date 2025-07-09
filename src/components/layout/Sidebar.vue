@@ -10,15 +10,15 @@
 			  :reduce="reduce"
 			  open>
 				<router-link class="clipped-bottom-right" to="/status">
-					<img src="/icons/orbital.svg" />
+					<img src="/icons/orbital.svg" class="filter-icon"/>
 					<span>Status</span>
 				</router-link>
 				<router-link class="clipped-bottom-right" to="/pilots">
-					<img src="/icons/pilot.svg" />
+					<img src="/icons/pilot.svg" class="filter-icon"/>
 					<span>Pilots</span>
 				</router-link>
 				<router-link class="clipped-bottom-right" to="/events">
-					<img src="/icons/events.svg" />
+					<img src="/icons/events.svg" class="filter-icon"/>
 					<span>Logs</span>
 				</router-link>
 			</o-sidebar>
