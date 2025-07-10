@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Landmark Colonial Support",
+    "type": "Tactical",
+    "description": "Request immediate logistical support from Landmark Colonial operations. Gain access to colony facilities and equipment for one mission.",
+    "callsign": ""
+  },
+  {
+    "name": "Colony Militia Backup",
+    "type": "Personnel",
+    "description": "Call in additional militia units for support. Gain allied NPC support during one encounter.",
+    "callsign": ""
+  },
+  {
+    "name": "Engineering Support",
+    "type": "Technical",
+    "description": "Access to Chief Engineer Fielding's workshop and technical expertise. Gain bonus to repair actions and equipment modifications.",
+    "callsign": ""
+  },
+  {
+    "name": "Forest Navigation Intel",
+    "type": "Environmental",
+    "description": "Detailed terrain maps and local knowledge from colony scouts. Gain immunity to difficult terrain in forest environments for one mission.",
+    "callsign": ""
+  },
+  {
+    "name": "Colony Supply Cache",
+    "type": "Logistical",
+    "description": "Access to colony emergency supplies and ammunition stores. Restore 1 charge to all LIMITED systems during rest.",
+    "callsign": ""
+  },
+  {
+    "name": "Surveillance Network",
+    "type": "Intelligence",
+    "description": "Access to colony sensor networks and surveillance systems. Gain detailed intelligence about one upcoming encounter.",
+    "callsign": ""
+  },
+  {
+    "name": "Emergency Medical",
+    "type": "Medical",
+    "description": "Priority access to colony medical facilities and staff. Gain enhanced healing and medical support during downtime.",
+    "callsign": ""
+  },
+  {
+    "name": "Defensive Preparations",
+    "type": "Tactical",
+    "description": "Pre-positioned defensive equipment and fortifications. Begin next combat encounter with favorable terrain or cover.",
+    "callsign": ""
+  },
+  {
+    "name": "Communication Priority",
+    "type": "Command",
+    "description": "Priority access to colony communication systems. Gain bonus to coordination and command actions during missions.",
+    "callsign": ""
+  },
+  {
+    "name": "Rapid Response",
+    "type": "Mobility",
+    "description": "Access to colony transport vehicles and rapid deployment systems. Gain enhanced mobility options for one mission.",
+    "callsign": ""
+  }
+]

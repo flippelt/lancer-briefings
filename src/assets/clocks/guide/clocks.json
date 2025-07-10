@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Consumption",
+    "description": "The Power Surges in Evergreen are steadily worsening, it's only a matter of time before Beggar One completes whatever he's planning.",
+    "value": 0,
+    "max": 4,
+    "color": "#8A0303",
+    "type": "Story"
+  },
+  {
+    "name": "Plan The Escape",
+    "description": "The steps needed in order to plan a successful escape from the Evergreen Prison",
+    "value": 2,
+    "max": 8,
+    "color": "#8A0303",
+    "type": "Story"
+  },
+  {
+    "name": "Discovered",
+    "description": "How close you are to having your Escape attempts discovered by Beggar One",
+    "value": 0,
+    "max": 6,
+    "color": "#8A0303",
+    "type": "Story"
+  },
+  {
+    "name": "Defense of Evergreen",
+    "type": "Mission",
+    "description": "The colony's overall defensive readiness and ability to withstand hostile attacks. Progress represents improved fortifications, better coordination, and enhanced security measures.",
+    "max": 8,
+    "value": 2,
+    "color": "#2E7D32"
+  },
+  {
+    "name": "Colony Morale",
+    "type": "Story",
+    "description": "The general mood and confidence of Evergreen's civilian population. High morale improves cooperation and reduces panic during crisis situations.",
+    "max": 6,
+    "value": 4,
+    "color": "#1565C0"
+  },
+  {
+    "name": "Infrastructure Repairs",
+    "type": "Mission",
+    "description": "Critical repairs to colony systems including communications, power, and transportation. Completion of repairs improves overall colony functionality.",
+    "max": 6,
+    "value": 1,
+    "color": "#F57C00"
+  },
+  {
+    "name": "Intelligence Network",
+    "type": "Story",
+    "description": "The colony's ability to gather information about hostile forces and predict their movements. Better intelligence leads to more effective defensive strategies.",
+    "max": 8,
+    "value": 3,
+    "color": "#7B1FA2"
+  },
+  {
+    "name": "Supply Lines",
+    "type": "Mission",
+    "description": "Maintenance of crucial supply routes and resource distribution. Secure supply lines ensure continued operations and civilian welfare.",
+    "max": 6,
+    "value": 3,
+    "color": "#D32F2F"
+  }
+]
