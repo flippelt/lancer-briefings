@@ -4,7 +4,7 @@
 		<section id="missions" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
 				<img src="/icons/campaign.svg" class="filter-icon"/>
-				<h1>Mission Log</h1>
+				<h1>Registro da Missão</h1>
 			</div>
 			<div class="section-content-container">
 				<div class="mission-list-container">
@@ -16,7 +16,7 @@
 		<section id="assignment" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
 				<img src="/icons/deployable.svg" class="filter-icon"/>
-				<h1>Current Assignment</h1>
+				<h1>Objetivo Atual</h1>
 			</div>
 			<div class="section-content-container">
 				<vue-markdown-it :source="missionMarkdown" class="markdown" />
@@ -26,7 +26,7 @@
 		<section id="reserves" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
 				<img src="/icons/squad.svg" class="filter-icon"/>
-				<h1>Reserves</h1>
+				<h1>Reservas</h1>
 			</div>
 			<div class="section-content-container">
 				<div class="reserves-list-container">
