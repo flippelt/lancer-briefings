@@ -1,15 +1,19 @@
+
 "use strict"
 import f from "./frames.json"
+import g from "./pilot_gear.json"
+import r from "./reserves.json"
 import s from "./systems.json"
 import w from "./weapons.json"
-import m from "./mods.json"
-
+import t from "./talents.json"
 
 const data = {
   frames: f,
+  pilot_gear: g,
+  reserves: r,
   systems: s,
   weapons: w,
-  mods: m,
+  talents: t,
 }
 
 export default data;
