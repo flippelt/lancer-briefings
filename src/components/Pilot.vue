@@ -1,12 +1,6 @@
 <template>
   <div class="grid-item pilot-identity" style="color:white!important">
-    <div class="header">
-      <div class="col grow-max">
-        <div class="heading h1">{{ pilot.callsign }}</div>
-        <div class="heading h2">({{ pilot.name }}) </div>
-      </div>
-      <div class="col"><i class="filter-icon" style="--icon-url: url('/faction-logos/union.svg')"></i></div>
-    </div>
+    <PilotIdentityHeader :pilot="pilot" />
     <div class="body">
       <div class="add-padding"> Union Administrative RM-4 Pilot Identification Protocol (IDENT) Record
         {{ pilot.id }} </div>
@@ -145,11 +139,14 @@ import Typer from '@/components/Typer.vue'
 import ProgressBar from '@/components/ProgressBar.vue'
 import Burden from '@/components/Burden.vue'
 
+import PilotIdentityHeader from '@/components/pilot/PilotIdentityHeader.vue'
+
 export default {
   components: {
     Burden,
     ProgressBar,
     Typer,
+    PilotIdentityHeader,
   },
   props: {
     animate: {
