@@ -30,23 +30,20 @@ export default defineConfig({
         short_name: "UN Briefing",
         description: "Lancer mission briefing dashboard",
         theme_color: "#991e2a",
-        background_color: "#ffffff",
+        // background_color is the PWA splash-screen color, separate
+        // from the icon. Keep it on-brand red so the splash matches
+        // the icon and the loading state doesn't flash white.
+        background_color: "#991e2a",
         display: "standalone",
         orientation: "any",
         start_url: "./",
         scope: "./",
         icons: [
           {
-            src: "faction-logos/union.svg",
+            src: "icons/pwa-icon.svg",
             sizes: "any",
             type: "image/svg+xml",
-            purpose: "any",
-          },
-          {
-            src: "faction-logos/union-white.svg",
-            sizes: "any",
-            type: "image/svg+xml",
-            purpose: "maskable",
+            purpose: "any maskable",
           },
         ],
       },
