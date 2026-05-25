@@ -427,6 +427,7 @@ section .section-header h1 {
 
 .section-content-container {
 	height: 100%;
+	min-height: 4em;
 	background: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -1px;

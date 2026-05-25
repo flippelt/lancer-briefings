@@ -352,7 +352,7 @@ export default {
           frames: this.frames,
         },
         class: 'custom-modal',
-        width: 1920,
+        width: 'min(1920px, 95vw)',
       })
     },
     mechModal() {
@@ -368,7 +368,7 @@ export default {
           pilot: this.pilot,
         },
         class: 'custom-modal',
-        width: 1920,
+        width: 'min(1920px, 95vw)',
       })
     },
   },
