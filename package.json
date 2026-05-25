@@ -4,9 +4,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"serve": "vite preview",
 		"preview": "vite preview",
-		"format": "prettier .  --write"
+		"format": "prettier . --write"
 	},
 	"dependencies": {
 		"@f3ve/vue-markdown-it": "^0.2.2",
