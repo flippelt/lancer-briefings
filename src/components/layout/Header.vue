@@ -1,7 +1,7 @@
 <template>
 	<header>
 		<div class="title clipped-x-large-forward">
-			<img class="logo filter-icon" src="/faction-logos/union.svg" />
+			<i class="logo filter-icon" style="--icon-url: url('/faction-logos/union.svg')"></i>
 			<div class="title-container">
 				<div id="title-first-line" class="title-row">
 					<span id="title-header">{{ header.headerTitle }}</span>

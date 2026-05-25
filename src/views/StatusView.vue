@@ -3,7 +3,7 @@
 		class="content-container">
 		<section id="missions" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
-				<img src="/icons/campaign.svg" class="filter-icon"/>
+				<i class="filter-icon" style="--icon-url: url('/icons/campaign.svg')"></i>
 				<h2>Registro da Missão</h2>
 			</div>
 			<div class="section-content-container">
@@ -15,7 +15,7 @@
 		</section>
 		<section id="assignment" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
-				<img src="/icons/deployable.svg" class="filter-icon"/>
+				<i class="filter-icon" style="--icon-url: url('/icons/deployable.svg')"></i>
 				<h2>Objetivo Atual</h2>
 			</div>
 			<div class="section-content-container">
@@ -25,7 +25,7 @@
 		<div>
 		<section id="reserves" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
-				<img src="/icons/squad.svg" class="filter-icon"/>
+				<i class="filter-icon" style="--icon-url: url('/icons/squad.svg')"></i>
 				<h2>Reservas</h2>
 			</div>
 			<div class="section-content-container">
@@ -36,7 +36,7 @@
 		</section>
 		<section id="clocks" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
-				<img src="/icons/protocol.svg" class="filter-icon"/>
+				<i class="filter-icon" style="--icon-url: url('/icons/protocol.svg')"></i>
 				<h2>Clocks</h2>
 			</div>
 			<div class="section-content-container">

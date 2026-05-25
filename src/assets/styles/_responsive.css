@@ -494,7 +494,7 @@ body > canvas {
 		-webkit-clip-path: none !important;
 	}
 
-	.sidebar-layout img {
+	.sidebar-layout .filter-icon {
 		width: 28px;
 		height: 28px;
 	}
@@ -549,7 +549,7 @@ body > canvas {
 		min-width: 0;
 	}
 
-	section .section-header img {
+	section .section-header .filter-icon {
 		width: 28px;
 		height: 28px;
 		flex: 0 0 auto;
@@ -671,7 +671,7 @@ body > canvas {
 		flex-wrap: wrap;
 	}
 
-	.pilot-identity .header .col img {
+	.pilot-identity .header .col .filter-icon {
 		width: 48px;
 		height: 48px;
 		float: none;

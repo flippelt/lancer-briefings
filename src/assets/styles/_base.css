@@ -36,8 +36,11 @@
 	--text-markdown-p: rgba(0, 0, 0, 0.87);
 	--text-markdown-h1: rgba(0, 0, 0, 0.67);
 	--text-markdown-h2: rgba(0, 0, 0, 0.87);
-	/* Icons Color */
-	--icon-color: invert(100%) sepia(49%) saturate(0%) hue-rotate(309deg) brightness(107%) contrast(101%);
+	/* Icons Color — applied via .filter-icon as background-color behind
+	   a mask-image. Default tracks --secondary-color so icons match the
+	   light-on-dark scheme; themes can override this single token to
+	   recolor every SVG icon at once. */
+	--icon-color: var(--secondary-color);
 
 	/* For Firefox */
 	scrollbar-color: var(--primary-color) transparent !important;
@@ -287,7 +290,7 @@ div.location-info {
 	text-align: center;
 }
 
-.sidebar-layout img {
+.sidebar-layout .filter-icon {
 	width: 48px;
 	height: 48px;
 }
@@ -408,7 +411,7 @@ section .section-header {
 
 
 
-section .section-header img {
+section .section-header .filter-icon {
 	width: 36px;
 	height: 36px;
 	align-self: center;
@@ -1579,7 +1582,7 @@ div.markdown ol li {
 	flex-grow:100;
 }
 
-.pilot-identity .header .col img {
+.pilot-identity .header .col .filter-icon {
 	float:right;
 	height:84px;
 	width: 84px;
@@ -1700,6 +1703,21 @@ div.markdown ol li {
 	text-align: justify;
 }
 
-.filter-icon{
-	filter: var(--icon-color)
+/* Single-color icon, rendered as a CSS mask over a background-color.
+   Set the SVG source per element via the --icon-url custom property:
+     <i class="filter-icon" style="--icon-url: url('/icons/x.svg')"></i>
+   Works on <img>, <i>, <span>, etc. The mask reads only the SVG's alpha,
+   so the SVG's own fill colors don't need to be touched — every icon
+   recolors uniformly via --icon-color. */
+.filter-icon {
+	display: inline-block;
+	background-color: var(--icon-color);
+	-webkit-mask-image: var(--icon-url);
+	        mask-image: var(--icon-url);
+	-webkit-mask-repeat: no-repeat;
+	        mask-repeat: no-repeat;
+	-webkit-mask-position: center;
+	        mask-position: center;
+	-webkit-mask-size: contain;
+	        mask-size: contain;
 }

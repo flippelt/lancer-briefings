@@ -22,15 +22,15 @@
 			  :reduce="reduce"
 			  open>
 				<router-link class="clipped-bottom-right" to="/status" @click="close">
-					<img src="/icons/orbital.svg" class="filter-icon"/>
+					<i class="filter-icon" style="--icon-url: url('/icons/orbital.svg')"></i>
 					<span>Status</span>
 				</router-link>
 				<router-link class="clipped-bottom-right" to="/pilots" @click="close">
-					<img src="/icons/pilot.svg" class="filter-icon"/>
+					<i class="filter-icon" style="--icon-url: url('/icons/pilot.svg')"></i>
 					<span>Pilotos</span>
 				</router-link>
 				<router-link class="clipped-bottom-right" to="/events" @click="close">
-					<img src="/icons/events.svg" class="filter-icon"/>
+					<i class="filter-icon" style="--icon-url: url('/icons/events.svg')"></i>
 					<span>Logs</span>
 				</router-link>
 			</o-sidebar>
