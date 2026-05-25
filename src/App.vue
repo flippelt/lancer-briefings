@@ -1,7 +1,7 @@
 <template>
 	<div class="page-wrapper">
 		<Header :planet-path="planetPath" :class="{ animate: animate }" :header="header" />
-		<Sidebar :animate="animate" :class="{ animate: animate }" />
+		<Sidebar :animate="animate" :class="{ animate: animate }" @open-settings="openSettings" />
 	</div>
 	<div id="router-view-container">
 		<router-view :animate="animate" :initial-slug="initialSlug" :missions="missions" :events="events"
@@ -26,7 +26,40 @@
 <script>
 import Header from "./components/layout/Header.vue";
 import Sidebar from "./components/layout/Sidebar.vue";
+import SettingsModal from "./components/modals/SettingsModal.vue";
 import Config from "@/assets/info/general-config.json";
+import { themeColorInt } from "@/assets/themes";
+
+const THEME_STORAGE_KEY = "theme-prefs";
+const DEFAULT_PREFS = { theme: "gms", mode: "light" };
+
+// Vanta config builder. The mesh color tracks the user's chosen theme
+// palette so the background animation matches the rest of the UI. Only
+// the backgroundColor stays mode-driven — light surfaces want a white
+// canvas behind the globe, dark surfaces want a near-black canvas.
+const VANTA_BASE = {
+	el: "body",
+	mouseControls: false,
+	touchControls: false,
+	gyroControls: false,
+	minHeight: 200.0,
+	minWidth: 200.0,
+	scale: 1.0,
+	scaleMobile: 1.0,
+	size: 2.0,
+	sphereRotation: -0.002,
+	meshRotation: 0.004,
+};
+
+function buildVantaConfig({ theme, mode }) {
+	const primary = themeColorInt(theme);
+	return {
+		...VANTA_BASE,
+		color: primary,
+		color2: primary,
+		backgroundColor: mode === "dark" ? 0x0c090d : 0xffffff,
+	};
+}
 
 export default {
 	components: {
@@ -41,6 +74,8 @@ export default {
 			planetPath: Config.planetPath,
 			header: Config.header,
 			pilotSpecialInfo: Config.pilotSpecialInfo,
+			themePrefs: this.loadThemePrefs(),
+			vantaEffect: null,
 			clocks: [],
 			events: [],
 			missions: [],
@@ -51,6 +86,9 @@ export default {
 	},
 	created() {
 		this.setTitleFavicon(Config.defaultTitle + " MISSION BRIEFING", Config.icon);
+		// Apply theme attributes before any child component renders to avoid
+		// a flash of the wrong palette on first paint.
+		this.applyThemeAttributes(this.themePrefs);
 		this.importMissions(import.meta.glob("@/assets/missions/*.md", { query: '?raw', import: 'default' }));
 		this.importEvents(import.meta.glob("@/assets/events/*.md", { query: '?raw', import: 'default' }));
 		this.importClocks(import.meta.glob("@/assets/clocks/*.json"));
@@ -58,6 +96,8 @@ export default {
 		this.importPilots(import.meta.glob("@/assets/pilots/*.json"));
 	},
 	mounted() {
+		this.initVanta();
+
 		// Most browsers block <audio autoplay> without prior user interaction.
 		// Start playback on the first click/keydown/touchstart and clean up.
 		const playStartup = () => {
@@ -71,7 +111,89 @@ export default {
 		window.addEventListener("pointerdown", playStartup, { once: true });
 		window.addEventListener("keydown", playStartup, { once: true });
 	},
+	beforeUnmount() {
+		if (this.vantaEffect) {
+			this.vantaEffect.destroy();
+			this.vantaEffect = null;
+		}
+	},
+	watch: {
+		themePrefs: {
+			deep: true,
+			handler(newPrefs) {
+				this.applyThemeAttributes(newPrefs);
+				this.persistThemePrefs(newPrefs);
+				// Both the mesh color (driven by theme) and the canvas
+				// background (driven by mode) can change here, so rebuild
+				// the effect on any change. Vanta has no in-place recolor
+				// API; destroy + recreate is the supported path.
+				this.rebuildVanta(newPrefs);
+			},
+		},
+	},
 	methods: {
+		loadThemePrefs() {
+			try {
+				const stored = localStorage.getItem(THEME_STORAGE_KEY);
+				if (stored) {
+					const parsed = JSON.parse(stored);
+					return {
+						theme: parsed.theme || DEFAULT_PREFS.theme,
+						mode: parsed.mode === "dark" ? "dark" : "light",
+					};
+				}
+			} catch {
+				// localStorage disabled / quota / parse error — fall through to defaults.
+			}
+			return { ...DEFAULT_PREFS };
+		},
+		persistThemePrefs(prefs) {
+			try {
+				localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(prefs));
+			} catch {
+				// Best-effort persistence; ignore failures.
+			}
+		},
+		applyThemeAttributes({ theme, mode }) {
+			const root = document.documentElement;
+			root.setAttribute("data-theme", theme);
+			root.setAttribute("data-mode", mode);
+		},
+		initVanta() {
+			// vanta.globe.min.js is loaded as a module script in index.html and
+			// may not have evaluated by the time mounted() runs. Poll briefly.
+			if (!window.VANTA || !window.VANTA.GLOBE) {
+				setTimeout(this.initVanta, 50);
+				return;
+			}
+			this.vantaEffect = window.VANTA.GLOBE(buildVantaConfig(this.themePrefs));
+		},
+		rebuildVanta(prefs) {
+			if (this.vantaEffect) {
+				this.vantaEffect.destroy();
+				this.vantaEffect = null;
+			}
+			if (window.VANTA && window.VANTA.GLOBE) {
+				this.vantaEffect = window.VANTA.GLOBE(buildVantaConfig(prefs));
+			}
+		},
+		openSettings() {
+			this.$oruga.modal.open({
+				component: SettingsModal,
+				custom: true,
+				trapFocus: true,
+				props: {
+					theme: this.themePrefs.theme,
+					mode: this.themePrefs.mode,
+				},
+				events: {
+					"update:theme": (value) => { this.themePrefs.theme = value; },
+					"update:mode":  (value) => { this.themePrefs.mode  = value; },
+				},
+				class: "settings-modal",
+				width: "min(640px, 92vw)",
+			});
+		},
 		setTitleFavicon(title, favicon) {
 			document.title = title;
 			let headEl = document.querySelector('head');

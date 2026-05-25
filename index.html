@@ -14,26 +14,12 @@
 
 	<body style="margin: 0px">
 		<div id="app"></div>
-		<script type="module" src="/src/main.js"></script>
+		<!-- Three.js and Vanta need to load before App.vue's mounted() hook
+		     calls VANTA.GLOBE(). The actual init (and its mode-aware config)
+		     lives in App.vue so the globe can be rebuilt when the user
+		     toggles light/dark in the Settings modal. -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 		<script type="module" src="/src/assets/scripts/vanta.globe.min.js"></script>
-		<script type="module">
-			VANTA.GLOBE({
-				el: "body",
-				mouseControls: false,
-				touchControls: false,
-				gyroControls: false,
-				minHeight: 200.0,
-				minWidth: 200.0,
-				scale: 1.0,
-				scaleMobile: 1.0,
-				color: 0xff0000,
-				color2: 0xff0000,
-				backgroundColor: 0xffffff,
-				size: 2.0,
-				sphereRotation: -0.002,
-				meshRotation: 0.004,
-			});
-		</script>
+		<script type="module" src="/src/main.js"></script>
 	</body>
 </html>
