@@ -2,7 +2,7 @@
   <div class="mech-modal">
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-bio">
-        <img src="/icons/npc.svg">
+        <i class="filter-icon" style="--icon-url: url('/icons/npc.svg')"></i>
         <h2>{{ mech.name }} [{{ mech.frame_name }}]</h2>
       </div>
       <div class="rhombus-back"></div>
@@ -50,7 +50,7 @@
   <div class="mech-modal portrait">
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-mech">
-        <img src="/icons/mech.svg">
+        <i class="filter-icon" style="--icon-url: url('/icons/mech.svg')"></i>
         <h2>Mech Artwork</h2>
       </div>
       <div class="rhombus-back">

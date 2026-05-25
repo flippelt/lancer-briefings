@@ -549,7 +549,7 @@ body > canvas {
 		min-width: 0;
 	}
 
-	section .section-header .filter-icon {
+	.section-header .filter-icon {
 		width: 28px;
 		height: 28px;
 		flex: 0 0 auto;
@@ -663,6 +663,34 @@ body > canvas {
 		max-height: 60vh;
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
+	}
+
+	/* Portrait variants of PilotModal / MechModal carry their own
+	   `.mech-modal.portrait .mech` / `.pilot-modal.portrait .pilot`
+	   rules in _base.css that hard-code width: 600px. Those selectors
+	   beat the generic `.mech-modal div.mech` override above on
+	   specificity (3 classes vs 2 classes + 1 element), so on narrow
+	   viewports the portrait container holds 600px and the image
+	   inside spills past the screen edge. */
+	.pilot-modal.portrait .pilot,
+	.mech-modal.portrait .mech {
+		width: 100% !important;
+		max-width: 100% !important;
+	}
+
+	/* The portrait <img> uses `object-fit: cover` to fill its box,
+	   cropping anything that doesn't fit the box's aspect ratio.
+	   That works when the parent has a fixed 600x... shape, but on
+	   mobile the parent collapses to `height: auto` and the image
+	   ends up stretched / clipped at the top with no way to see the
+	   rest. Switch to `contain` and let the image set its own height
+	   from the natural aspect ratio of the source. */
+	.pilot-modal.portrait img.portrait,
+	.mech-modal.portrait img.portrait {
+		width: 100% !important;
+		height: auto !important;
+		max-height: 70vh;
+		object-fit: contain;
 	}
 
 	.pilot-identity .header {

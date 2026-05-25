@@ -2,7 +2,7 @@
 	<div class="event-modal">
 		<div class="event-header-container">
 			<div class="section-header clipped-medium-backward-bio">
-				<img src="/icons/events.svg" />
+				<i class="filter-icon" style="--icon-url: url('/icons/events.svg')"></i>
 				<h2>EVENT LOG</h2>
 			</div>
 			<div class="rhombus-back">&nbsp;</div>
