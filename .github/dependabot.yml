@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      vite:
+        patterns:
+          - "vite"
+          - "vite-*"
+          - "@vitejs/*"
+      vue:
+        patterns:
+          - "vue"
+          - "vue-*"
+          - "@vue/*"
+      lancer-data:
+        patterns:
+          - "@massif/lancer-data"
+          - "lancer-*"
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
