@@ -49,18 +49,7 @@
 </template>
 
 <script>
-const THEMES = [
-	{ key: "albatross", label: "Albatross", color: "#ca1510" },
-	{ key: "galsin",    label: "Galsin",    color: "#e36600" },
-	{ key: "gms",       label: "GMS",       color: "#991e2a" },
-	{ key: "ha",        label: "HA",        color: "#771675" },
-	{ key: "horus",     label: "HORUS",     color: "#126127" },
-	{ key: "ipsn",      label: "IPS-N",     color: "#1952a2" },
-	{ key: "karrakin",  label: "Karrakin",  color: "#996414" },
-	{ key: "msmc",      label: "MSMC",      color: "#7dbbbb" },
-	{ key: "ssc",       label: "SSC",       color: "#d1920a" },
-	{ key: "voladores", label: "Voladores", color: "#b87333" },
-];
+import { themes } from "@/assets/themes";
 
 export default {
 	name: "SettingsModal",
@@ -72,7 +61,7 @@ export default {
 	emits: ["update:theme", "update:mode"],
 	data() {
 		return {
-			themes: THEMES,
+			themes,
 			selectedTheme: this.theme,
 			selectedMode:  this.mode,
 		};

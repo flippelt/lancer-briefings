@@ -32,13 +32,15 @@ import Header from "./components/layout/Header.vue";
 import Sidebar from "./components/layout/Sidebar.vue";
 import SettingsModal from "./components/modals/SettingsModal.vue";
 import Config from "@/assets/info/general-config.json";
+import { themeColorInt } from "@/assets/themes";
 
 const THEME_STORAGE_KEY = "theme-prefs";
 const DEFAULT_PREFS = { theme: "gms", mode: "light" };
 
-// Vanta config per mode. Light mode mirrors the historical
-// red-on-white globe; dark mode mirrors what every Lancer fork theme
-// shipped — pink/green mesh over a near-black background.
+// Vanta config builder. The mesh color tracks the user's chosen theme
+// palette so the background animation matches the rest of the UI. Only
+// the backgroundColor stays mode-driven — light surfaces want a white
+// canvas behind the globe, dark surfaces want a near-black canvas.
 const VANTA_BASE = {
 	el: "body",
 	mouseControls: false,
@@ -52,8 +54,16 @@ const VANTA_BASE = {
 	sphereRotation: -0.002,
 	meshRotation: 0.004,
 };
-const VANTA_LIGHT = { ...VANTA_BASE, color: 0xff0000, color2: 0xff0000, backgroundColor: 0xffffff };
-const VANTA_DARK  = { ...VANTA_BASE, color: 0x694f5d, color2: 0x68a691, backgroundColor: 0x0c090d };
+
+function buildVantaConfig({ theme, mode }) {
+	const primary = themeColorInt(theme);
+	return {
+		...VANTA_BASE,
+		color: primary,
+		color2: primary,
+		backgroundColor: mode === "dark" ? 0x0c090d : 0xffffff,
+	};
+}
 
 export default {
 	components: {
@@ -117,10 +127,12 @@ export default {
 			handler(newPrefs) {
 				this.applyThemeAttributes(newPrefs);
 				this.persistThemePrefs(newPrefs);
+				// Both the mesh color (driven by theme) and the canvas
+				// background (driven by mode) can change here, so rebuild
+				// the effect on any change. Vanta has no in-place recolor
+				// API; destroy + recreate is the supported path.
+				this.rebuildVanta(newPrefs);
 			},
-		},
-		"themePrefs.mode"(newMode) {
-			this.rebuildVanta(newMode);
 		},
 	},
 	methods: {
@@ -158,17 +170,15 @@ export default {
 				setTimeout(this.initVanta, 50);
 				return;
 			}
-			const config = this.themePrefs.mode === "dark" ? VANTA_DARK : VANTA_LIGHT;
-			this.vantaEffect = window.VANTA.GLOBE(config);
+			this.vantaEffect = window.VANTA.GLOBE(buildVantaConfig(this.themePrefs));
 		},
-		rebuildVanta(mode) {
+		rebuildVanta(prefs) {
 			if (this.vantaEffect) {
 				this.vantaEffect.destroy();
 				this.vantaEffect = null;
 			}
 			if (window.VANTA && window.VANTA.GLOBE) {
-				const config = mode === "dark" ? VANTA_DARK : VANTA_LIGHT;
-				this.vantaEffect = window.VANTA.GLOBE(config);
+				this.vantaEffect = window.VANTA.GLOBE(buildVantaConfig(prefs));
 			}
 		},
 		openSettings() {
