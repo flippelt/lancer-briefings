@@ -116,7 +116,7 @@ Quote values that contain `:` or other YAML-significant characters. See `/src/as
 
 ## Continuous Integration
 
-A GitHub Actions workflow in `.github/workflows/build.yml` runs `npm ci && npm run build` on every pull request to `master` (and on direct pushes to `master`). The `master` branch is protected by a ruleset that requires the build check to pass before merging. Dependabot (`.github/dependabot.yml`) opens grouped monthly PRs for npm and GitHub Actions updates; each PR is validated by the same build check.
+A GitHub Actions workflow in `.github/workflows/build.yml` runs `npm ci && npm run build` on every pull request to `main` (and on direct pushes to `main`). The `main` branch is protected by a ruleset that requires the build check to pass before merging. Dependabot (`.github/dependabot.yml`) opens grouped monthly PRs for npm and GitHub Actions updates; each PR is validated by the same build check.
 
 ## Responsive layout
 
@@ -133,11 +133,24 @@ All breakpoints live in `/src/assets/styles/_responsive.css` as the single sourc
 
 The `<audio>` element in `App.vue` is no longer set to autoplay — most browsers (Chrome, Firefox, Safari) block autoplay with sound until the page receives a user gesture, so the original `<audio autoplay>` was silently rejected for first-time visitors. Playback now triggers on the first `pointerdown` or `keydown` event after load.
 
+## Progressive Web App (offline support)
+
+The site is configured as an installable PWA via `vite-plugin-pwa`. After the first visit the service worker pre-caches every built asset (HTML, JS, CSS, fonts, icons, the planet `.webm`, the startup `.ogg`, and so on) plus runtime-caches Google Fonts, the three.js CDN script, and external event-thumbnail images. The result is a briefing dashboard that keeps working in full at the table even if the venue WiFi drops mid-session.
+
+To install:
+
+- **Mobile (Chrome / Safari):** open the site → browser menu → "Add to Home Screen".
+- **Desktop (Chrome / Edge):** click the install icon in the address bar (appears once the manifest is loaded).
+
+The manifest, service worker, and registration shim are all generated automatically at `npm run build` time (`dist/manifest.webmanifest`, `dist/sw.js`, `dist/registerSW.js`). They are *not* active in `npm run dev` — toggle `devOptions.enabled` to `true` in `vite.config.ts` if you need to exercise the offline behavior locally; otherwise run `npm run build && npm run preview`.
+
+When a new version is deployed, the service worker installs in the background and takes over on the next navigation (`registerType: "autoUpdate"`) — visitors get the new code without a manual hard refresh.
+
 ## Hosting Recommendations
 
 I would strongly recommend using [Netlify](https://www.netlify.com/) for hosting, as there's no cost for hosting, has Continuous Deployment, and they'll provide a url. Register for an account, and click the `New Site from Git` button.
 On the next page, pick the git service you used to fork this repo with, and authenticate. On the next page, select the `lancer-briefings` repository. If you can't see the repository listed on the page, click the `Can’t see your repo here? Configure the Netlify app on <git site>` link at the bottom of the page.
-Finally, make sure the branch being deployed is `master`, the `base directory` field is blank, the `build command` is `npm run build`, and the publish directory is `dist`.
+Finally, make sure the branch being deployed is `main`, the `base directory` field is blank, the `build command` is `npm run build`, and the publish directory is `dist`.
 
 Once the site builds remotely, click on the link provided in the `site overview` tab and make sure everything looks right.
 
