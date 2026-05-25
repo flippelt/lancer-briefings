@@ -114,7 +114,9 @@ body > canvas {
 	}
 
 	section.section-container#events-logs {
-		width: calc(100vw - 90px - 393px - 120px);
+		/* sidebar (90) + #events width (393) + #events margins (60)
+		   + #events-logs margins (180) = 723px reserved */
+		width: calc(100vw - 723px);
 		min-width: 600px;
 		max-width: 1179px;
 	}
@@ -257,6 +259,22 @@ body > canvas {
 		padding-bottom: 2em;
 		width: calc(100vw - 90px);
 		box-sizing: border-box;
+	}
+
+	/* EventsView: the side-by-side events (393px) + events-logs (>=600px)
+	   layout doesn't fit in this range — stack them and let each take
+	   the full content width. */
+	#eventsView.content-container {
+		flex-direction: column;
+	}
+
+	section.section-container#events,
+	section.section-container#events-logs {
+		width: calc(100% - 40px);
+		max-width: calc(100% - 40px);
+		min-width: 0;
+		margin: 20px;
+		height: auto;
 	}
 }
 
