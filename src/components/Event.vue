@@ -4,7 +4,7 @@
 			<h1>{{ event.location }} // {{ event.time }}</h1>
 			<h2>{{ event.title }}</h2>
 		</div>
-		<img class="thumbnail" :src="event.thumbnail" />
+		<img class="thumbnail" :src="event.thumbnail" loading="lazy" decoding="async" />
 		<div class="preview">
 			{{ getPreview }}
 		</div>

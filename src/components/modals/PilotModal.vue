@@ -3,7 +3,7 @@
 		<div class="pilot-header-container">
 			<div class="section-header clipped-medium-backward-bio">
 				<img src="/icons/pilot.svg" />
-				<h1>{{ pilot.name }} [{{ pilot.callsign }}]</h1>
+				<h2>{{ pilot.name }} [{{ pilot.callsign }}]</h2>
 			</div>
 			<div class="rhombus-back">&nbsp;</div>
 		</div>
@@ -15,12 +15,12 @@
 		<div class="pilot-header-container">
 			<div class="section-header clipped-medium-backward-pilot">
 				<img src="/icons/portrait.svg" />
-				<h1>Pilot Artwork</h1>
+				<h2>Pilot Artwork</h2>
 			</div>
 			<div class="rhombus-back">&nbsp;</div>
 		</div>
 		<div class="pilot">
-			<img :src="pilotPortrait" class="portrait" />
+			<img :src="pilotPortrait" class="portrait" loading="lazy" decoding="async" />
 		</div>
 	</div>
 </template>
