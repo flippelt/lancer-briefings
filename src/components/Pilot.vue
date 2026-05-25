@@ -41,33 +41,11 @@
           </div>
         </div>
       </div>
-      <div class="flex-container-cols modal-buttons">
-        <div class="row biometrics-container">
-          <div class="biometrics flex-container-cols" @click="pilotModal">
-            <div>
-              <i aria-hidden="true" class="v-icon notranslate mdi mdi-fingerprint theme--dark grey--text text--darken-2"
-                style="font-size: 36px; margin-top:36px;"></i>
-            </div>
-            <div style="width:100%">
-              BIOMETRIC RECORD VALID [[{{ randomNumber(14, 22) }}PB]]<br />
-              OHM C//{{ timeStamp(pilot.lastModified) }}
-            </div>
-          </div>
-        </div>
-        <div class="row biometrics-container">
-          <div class="mech-record flex-container-cols" @click="mechModal">
-            <div style="width:100%">
-              MECHANICAL BLUEPRINT VALID [[{{ randomNumber(14, 22) }}TB]] <br />
-              {{ activeMech.manufacturer.toUpperCase() }}-{{ activeMech.frame_name.toUpperCase() }} :: "{{ activeMech.name.toUpperCase() }}"
-            </div>
-            <div>
-              <i aria-hidden="true"
-                class="v-icon notranslate cci cci-reserve-mech theme--dark grey--text text--darken-2 larger"
-                style="font-size: 42px; margin-top:1em;"></i>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PilotModalButtons
+        :pilot="pilot"
+        :active-mech="activeMech"
+        @open-pilot-modal="pilotModal"
+        @open-mech-modal="mechModal" />
       <hr role="separator" aria-orientation="horizontal" class="ma-2 v-divider theme--dark">
       <div class="row row--dense"><span class="overline" style="line-height: 13px !important; opacity: 0.4;">
           Improper use of this IDENT record and/or its constituent data by the record holder or any other
@@ -85,25 +63,6 @@
   </div>
 </template>
 
-<style scoped>
-.larger::before {
-  margin-top: 9px;
-}
-
-.mdi::before {
-  margin-top: 9px;
-}
-
-.mech-record {
-  margin-left: auto;
-  text-align: right;
-}
-
-.modal-buttons {
-  margin-top: 5px;
-}
-</style>
-
 <script>
 import 'external-svg-loader'
 import lancerData from '@massif/lancer-data'
@@ -120,6 +79,7 @@ import Burden from '@/components/Burden.vue'
 import PilotIdentityHeader from '@/components/pilot/PilotIdentityHeader.vue'
 import PilotStatsBlock from '@/components/pilot/PilotStatsBlock.vue'
 import PilotChipsRow from '@/components/pilot/PilotChipsRow.vue'
+import PilotModalButtons from '@/components/pilot/PilotModalButtons.vue'
 
 export default {
   components: {
@@ -129,6 +89,7 @@ export default {
     PilotIdentityHeader,
     PilotStatsBlock,
     PilotChipsRow,
+    PilotModalButtons,
   },
   props: {
     animate: {
@@ -256,24 +217,6 @@ export default {
       const reversed = words.reverse()
       const reversedResult = words.join('.')
       return reversedResult
-    },
-    randomNumber(max, min) {
-      const rand = Math.random() * (max - min) + min
-      const power = Math.pow(10, 2)
-      return Math.floor(rand * power) / power
-    },
-    timeStamp(str) {
-      let date = new Date(str);
-      let y = date.getFullYear();
-      let m = date.getMonth();
-      let d = date.getDate();
-      let h = date.getHours();
-      let mi = date.getMinutes();
-      let s = date.getSeconds();
-      let ms = date.getMilliseconds();
-      let tz = date.getTimezoneOffset();
-      y += 2990;
-      return new Date(y, m, d, h, mi, s, ms).toISOString();
     },
     pilotModal() {
       this.$oruga.modal.open({
