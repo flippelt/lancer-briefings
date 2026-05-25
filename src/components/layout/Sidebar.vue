@@ -33,6 +33,14 @@
 					<i class="filter-icon" style="--icon-url: url('/icons/events.svg')"></i>
 					<span>Logs</span>
 				</router-link>
+				<button
+					type="button"
+					class="settings-link clipped-bottom-right"
+					@click="onSettingsClick"
+					aria-label="Configurações de tema">
+					<i class="filter-icon" style="--icon-url: url('/icons/protocol.svg')"></i>
+					<span>Tema</span>
+				</button>
 			</o-sidebar>
 		</section>
 	</div>
@@ -46,6 +54,7 @@ export default {
 			required: true,
 		},
 	},
+	emits: ["open-settings"],
 	data() {
 		return {
 			expandOnHover: false,
@@ -61,6 +70,44 @@ export default {
 		close() {
 			this.isOpen = false;
 		},
+		onSettingsClick() {
+			this.close();
+			this.$emit("open-settings");
+		},
 	},
 };
 </script>
+
+<style scoped>
+/* Pin the settings entry to the bottom of the sidebar / drawer
+   regardless of how many links are above it. */
+.settings-link {
+	margin-top: auto;
+	background: transparent;
+	border: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+	padding: 0.5em 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25em;
+	text-decoration: none;
+	font-family: "Roboto", sans-serif;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	font-size: 12px;
+	color: var(--on-primary);
+	width: 100%;
+}
+
+.settings-link:hover {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.settings-link .filter-icon {
+	width: 48px;
+	height: 48px;
+}
+</style>

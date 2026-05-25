@@ -332,6 +332,10 @@ div.location-info {
 	padding-right: 0.5em;
 	padding-top: 1em;
 	text-align: center;
+	/* Column flex lets `.settings-link { margin-top: auto }` push the
+	   theme button to the bottom of the sidebar / drawer. */
+	display: flex;
+	flex-direction: column;
 }
 
 .sidebar-layout .filter-icon {

@@ -1,5 +1,5 @@
 <template>
-	<div class="settings-card">
+	<div class="settings-card" @click.stop>
 		<div class="settings-header-container">
 			<div class="section-header clipped-medium-backward">
 				<i class="filter-icon" style="--icon-url: url('/icons/protocol.svg')"></i>
@@ -85,6 +85,12 @@ export default {
 	border: 1px solid var(--primary-color);
 	max-width: 640px;
 	width: 100%;
+	max-height: 90vh;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	position: relative;
+	z-index: 1;
+	pointer-events: auto;
 	box-sizing: border-box;
 }
 

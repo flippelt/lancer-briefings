@@ -1,11 +1,7 @@
 <template>
 	<div class="page-wrapper">
-		<Header
-			:planet-path="planetPath"
-			:class="{ animate: animate }"
-			:header="header"
-			@open-settings="openSettings" />
-		<Sidebar :animate="animate" :class="{ animate: animate }" />
+		<Header :planet-path="planetPath" :class="{ animate: animate }" :header="header" />
+		<Sidebar :animate="animate" :class="{ animate: animate }" @open-settings="openSettings" />
 	</div>
 	<div id="router-view-container">
 		<router-view :animate="animate" :initial-slug="initialSlug" :missions="missions" :events="events"
