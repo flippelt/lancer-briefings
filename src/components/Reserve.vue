@@ -8,7 +8,7 @@
 			{{ reserve.description }}
 		</div>
 		<div v-if="reserve.callsign" class="pilot">
-			<img :src="ownerImage" class="portrait" />
+			<img :src="ownerImage" class="portrait" loading="lazy" decoding="async" />
 			<div class="name">
 				<h1>Reserve Owner</h1>
 				<h2>{{ reserve.callsign }}</h2>

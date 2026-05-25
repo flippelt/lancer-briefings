@@ -18,7 +18,7 @@
 			</filter>
 		</defs>
 	</svg>
-	<audio autoplay>
+	<audio ref="startupAudio" preload="auto">
 		<source src="/startup.ogg" type="audio/ogg" />
 	</audio>
 </template>
@@ -58,7 +58,18 @@ export default {
 		this.importPilots(import.meta.glob("@/assets/pilots/*.json"));
 	},
 	mounted() {
-		this.$router.push("/status");
+		// Most browsers block <audio autoplay> without prior user interaction.
+		// Start playback on the first click/keydown/touchstart and clean up.
+		const playStartup = () => {
+			const audio = this.$refs.startupAudio;
+			if (audio && audio.paused) {
+				audio.play().catch(() => {});
+			}
+			window.removeEventListener("pointerdown", playStartup);
+			window.removeEventListener("keydown", playStartup);
+		};
+		window.addEventListener("pointerdown", playStartup, { once: true });
+		window.addEventListener("keydown", playStartup, { once: true });
 	},
 	methods: {
 		setTitleFavicon(title, favicon) {

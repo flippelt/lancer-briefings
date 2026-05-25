@@ -3,7 +3,7 @@
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-bio">
         <img src="/icons/npc.svg">
-        <h1>{{ mech.name }} [{{ mech.frame_name }}]</h1>
+        <h2>{{ mech.name }} [{{ mech.frame_name }}]</h2>
       </div>
       <div class="rhombus-back"></div>
     </div>
@@ -51,14 +51,14 @@
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-mech">
         <img src="/icons/mech.svg">
-        <h1>Mech Artwork</h1>
+        <h2>Mech Artwork</h2>
       </div>
       <div class="rhombus-back">
         &nbsp;
       </div>
     </div>
     <div class="mech">
-      <img :src="mechPortrait" class="portrait">
+      <img :src="mechPortrait" class="portrait" loading="lazy" decoding="async">
     </div>
   </div>
 </template>

@@ -63,7 +63,7 @@
           <div class="col">
             <div class="pilot-image-container">
               <div class="pilot-image-border">
-                <img :src="pilotPortrait" class="portrait" />
+                <img :src="pilotPortrait" class="portrait" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>
@@ -135,15 +135,7 @@
 <script>
 import 'external-svg-loader'
 import lancerData from '@massif/lancer-data'
-import ktbData from 'lancer-ktb-data'
-import nrfawData from 'lancer-nrfaw-data'
-import longrimData from 'lancer-longrim-data'
-import wallflowerData from '@/assets/LCPs/wallflower-data-2.0.5'
-import osrData from '@/assets/LCPs/osr-data-1.2.0'
-import sotwData from '@/assets/LCPs/sotw-data-1.0.2'
-import owsData from '@/assets/LCPs/ows-data-1.0.0'
-import dustgraveData from '@/assets/LCPs/dustgrave-data-1.4.0'
-import sirenData from '@/assets/LCPs/siren-song-data'
+import lcp from '@/assets/LCPs'
 
 import PilotModal from '@/components/modals/PilotModal.vue'
 import MechModal from '@/components/modals/MechModal.vue'
@@ -182,27 +174,13 @@ export default {
     mechPortrait() {
       return `/mechs/${this.pilot.callsign.toUpperCase()}.webp`
     },
-    pilotGear() {
-      return [...lancerData.pilot_gear, ...dustgraveData.pilot_gear, ...sirenData.pilot_gear]
-    },
-    mechWeapons() {
-      return [...lancerData.weapons, ...ktbData.weapons, ...nrfawData.weapons, ...longrimData.weapons, ...osrData.weapons, ...owsData.weaons, ...dustgraveData.weapons, ...sirenData.weapons]
-    },
-    mechSystems() {
-      return [...lancerData.systems, ...ktbData.systems, ...nrfawData.systems, ...longrimData.systems, ...osrData.systems, ...sotwData.systems, ...owsData.systems, ...dustgraveData.systems, ...sirenData.systems]
-    },
-    talents() {
-      return [...lancerData.talents, ...ktbData.talents, ...nrfawData.talents, ...longrimData.talents, ...osrData.talents, ...dustgraveData.talents, ...sirenData.talents]
-    },
-    skills() {
-      return [...lancerData.skills]    
-    },
-     bonds() {
-      return [...ktbData.bonds, ...sotwData.bonds]
-    },
-    frames() {
-      return [...lancerData.frames, ...ktbData.frames, ...nrfawData.frames, ...longrimData.frames, ...osrData.frames, ...sotwData.frames, ...owsData.frames, ...dustgraveData.frames, ...sirenData.frames]
-    },
+    pilotGear() { return lcp.pilotGear },
+    mechWeapons() { return lcp.weapons },
+    mechSystems() { return lcp.systems },
+    talents() { return lcp.talents },
+    skills() { return lcp.skills },
+    bonds() { return lcp.bonds },
+    frames() { return lcp.frames },
     mechManufacturerIcon() {
       if (this.activeMech.manufacturer)
         return `/faction-logos/${this.activeMech.manufacturer.toLowerCase()}.svg`

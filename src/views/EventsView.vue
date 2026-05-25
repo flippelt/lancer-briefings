@@ -3,7 +3,7 @@
 		<section id="events" :class="{ animate: animate }" class="section-container">
 			<div class="section-header clipped-medium-backward">
 				<img src="/icons/clockwork.svg" class="filter-icon" />
-				<h1>BEATS</h1>
+				<h2>BEATS</h2>
 			</div>
 			<div class="section-content-container">
 				<div class="events-list-container">
@@ -20,7 +20,7 @@
 			<div style="height: 52px; overflow: hidden">
 				<div class="section-header clipped-medium-backward-events-logs">
 					<img src="/icons/conversation.svg" class="filter-icon" />
-					<h1>EVENT LOG</h1>
+					<h2>EVENT LOG</h2>
 				</div>
 				<div class="rhombus-back">&nbsp;</div>
 			</div>
