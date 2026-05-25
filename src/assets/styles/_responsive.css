@@ -540,7 +540,7 @@ body > canvas {
 		gap: 10px;
 	}
 
-	section .section-header h1 {
+	section .section-header h2 {
 		font-size: 20px;
 		white-space: nowrap;
 		overflow: hidden;
@@ -767,7 +767,7 @@ body > canvas {
 		font-size: 12px;
 	}
 
-	section .section-header h1 {
+	section .section-header h2 {
 		font-size: 17px;
 	}
 

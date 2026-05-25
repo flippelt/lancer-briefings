@@ -414,7 +414,7 @@ section .section-header img {
 	align-self: center;
 }
 
-section .section-header h1 {
+section .section-header h2 {
 	font-size: 26px;
 	margin: 0%;
 	align-self: center;
@@ -931,7 +931,7 @@ section .section-header h1 {
 	margin-top: -38px !important;
 }
 
-.grid-item div .section-header h1 {
+.grid-item div .section-header h2 {
 	font-size: 26px;
 	margin: 0%;
 	align-self: center;
@@ -1001,7 +1001,7 @@ section .section-header h1 {
 	padding-left: 16px;
 	margin-top: -38px !important;
 }
-.pilot-modal div .section-header h1 {
+.pilot-modal div .section-header h2 {
 	font-size: 26px;
 	margin: 0%;
 	align-self: center;
@@ -1073,7 +1073,7 @@ section .section-header h1 {
 	margin-top: -38px !important;
 }
 
-.mech-modal div .section-header h1 {
+.mech-modal div .section-header h2 {
 	font-size: 26px;
 	margin: 0%;
 	align-self: center;
@@ -1203,7 +1203,7 @@ section .section-header h1 {
 	margin-top: -38px !important;
 }
 
-.event-modal div .section-header h1 {
+.event-modal div .section-header h2 {
 	font-size: 26px;
 	margin: 0%;
 	align-self: center;
