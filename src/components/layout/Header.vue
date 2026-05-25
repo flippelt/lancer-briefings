@@ -25,7 +25,7 @@
 						<span class="subtitle">{{ header.year }}</span>
 					</div>
 					<div id="planet">
-						<h4>Local de Implantação</h4>
+						<h4>Planeta</h4>
 						<span class="subtitle">{{ header.planet }}</span>
 					</div>
 				</div>

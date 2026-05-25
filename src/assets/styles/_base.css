@@ -309,6 +309,7 @@ div.location-info {
 }
 
 .location-row #ring {
+	width: 75px;
 	border-left: 1px solid var(--highlight-hover);
 	padding-right: 0px;
 }
