@@ -78,26 +78,28 @@ export default {
 	top: 12px;
 	right: 12px;
 	z-index: 6;
-	width: 36px;
-	height: 36px;
-	padding: 6px;
-	background: transparent;
-	border: 1px solid var(--on-primary);
+	width: 40px;
+	height: 40px;
+	padding: 7px;
+	background: var(--primary-color);
+	border: none;
 	border-radius: 4px;
 	cursor: pointer;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	transition: background 0.15s ease;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+	transition: filter 0.15s ease;
 }
 
 .settings-button:hover {
-	background: rgba(255, 255, 255, 0.15);
+	filter: brightness(1.15);
 }
 
 .settings-button .filter-icon {
-	width: 22px;
-	height: 22px;
+	width: 24px;
+	height: 24px;
+	background-color: var(--on-primary);
 }
 
 /* On mobile the hamburger lives at top-right; bump the settings button
