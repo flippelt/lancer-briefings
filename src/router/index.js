@@ -1,10 +1,10 @@
 import { createMemoryHistory, createWebHistory, createRouter } from "vue-router";
 
-import Status from "@/views/StatusView.vue";
-import Pilots from "@/views/PilotsView.vue";
-import Events from "@/views/EventsView.vue";
 import Config from "@/assets/info/general-config.json";
 
+// Dynamic imports below let Vite split each route into its own chunk —
+// the Pilots route in particular pulls in all the @massif/lancer-data
+// and LCP bundles, which we don't want in the initial payload.
 const DEFAULT_TITLE = Config.defaultTitle;
 const routes = [
 	{
@@ -14,21 +14,21 @@ const routes = [
 	{
 		path: "/status",
 		name: "Mission Status",
-		component: Status,
+		component: () => import("@/views/StatusView.vue"),
 		props: true,
 		meta: { title: `${DEFAULT_TITLE} MISSION STATUS` },
 	},
 	{
 		path: "/pilots",
 		name: "Pilots",
-		component: Pilots,
+		component: () => import("@/views/PilotsView.vue"),
 		props: true,
 		meta: { title: `${DEFAULT_TITLE} PILOT ROSTER` },
 	},
 	{
 		path: "/events",
 		name: "Events",
-		component: Events,
+		component: () => import("@/views/EventsView.vue"),
 		props: true,
 		meta: { title: `${DEFAULT_TITLE} EVENTS LOG` },
 	},
