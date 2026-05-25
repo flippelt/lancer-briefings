@@ -20,30 +20,15 @@
             <PilotStatsBlock :pilot="pilot" />
             <div class="row flex-container-cols">
               <div class="col col-share">
-                <span>PILOT SKILL TRIGGER AUDIT</span>
-                <br>
-                <div class="chip-container" v-for="skill in pilot.skills" :key="skill.id">
-                  <span class="chip"><i aria-hidden="true" class="notranslate cci cci-skill"></i>{{ getSkill(skill)
-                  }}</span>
-                </div>
+                <PilotChipsRow kind="skill" :items="pilot.skills" />
               </div>
               <div class="col col-share">
-                <span>PILOT TALENT AUDIT</span>
-                <br>
-                <div class="chip-container" v-for="talent in pilot.talents" :key="talent.id">
-                  <span class="chip"><i aria-hidden="true" class="notranslate cci cci-talent"></i>{{
-                    getTalent(talent.id, talent.rank) }}</span>
-                </div>
+                <PilotChipsRow kind="talent" :items="pilot.talents" />
               </div>
             </div>
             <div v-if="pilot.level > 0" class="row flex-container-cols">
               <div class="col" style="padding-top:5px">
-                <span>PROCUREMENT LICENSE AUDIT: LEVEL {{ pilot.level }}</span>
-                <br>
-                <div class="chip-container" v-for="license in pilot.licenses" :key="license.id">
-                  <span class="chip"><i aria-hidden="true" class="notranslate cci cci-license"></i>{{
-                    getLicense(license.id, license.rank) }}</span>
-                </div>
+                <PilotChipsRow kind="license" :items="pilot.licenses" :pilot-level="pilot.level" />
               </div>
             </div>
           </div>
@@ -134,6 +119,7 @@ import Burden from '@/components/Burden.vue'
 
 import PilotIdentityHeader from '@/components/pilot/PilotIdentityHeader.vue'
 import PilotStatsBlock from '@/components/pilot/PilotStatsBlock.vue'
+import PilotChipsRow from '@/components/pilot/PilotChipsRow.vue'
 
 export default {
   components: {
@@ -142,6 +128,7 @@ export default {
     Typer,
     PilotIdentityHeader,
     PilotStatsBlock,
+    PilotChipsRow,
   },
   props: {
     animate: {
@@ -259,28 +246,6 @@ export default {
 
       response += "</p>"
 
-      return response;
-    },
-    getSkill(skill) {
-      let sk = this.skills.find((x) => x.id == skill.id);
-      return sk.name + " +" + (skill.rank * 2)
-    },
-    getTalent(id, value) {
-      let talent = this.talents.find((x) => x.id == id);
-      let response = talent.name + " "
-
-      for (let i = 0; i < value; i++) {
-        response += "I"
-      }
-      return response;
-    },
-    getLicense(id, value) {
-      let frame = this.frames.find((x) => x.id == id);
-      let response = frame.source + " " + frame.name + " "
-
-      for (let i = 0; i < value; i++) {
-        response += "I"
-      }
       return response;
     },
     capitalize(str) {
