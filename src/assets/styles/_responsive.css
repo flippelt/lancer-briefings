@@ -349,6 +349,86 @@ body > canvas {
 }
 
 /* ============================================
+   MODAL SWIPE CAROUSEL (max 1199px — mobile + tablet)
+   PilotModal and MechModal each have two root <div> elements (data
+   + portrait artwork). On desktop they sit side-by-side via the
+   flex+gap rule in _base.css. On smaller viewports there isn't room
+   for both, so we re-purpose the same wrapper into a horizontal
+   scroll-snap carousel: each pane gets 100% of the wrapper width,
+   and the user swipes left/right to switch between data and image.
+
+   Implementation uses CSS scroll-snap — no JS needed. The browser
+   handles momentum, snap points, and accessibility (keyboard arrow
+   keys move between snap points when the wrapper is focused).
+   ============================================ */
+@media (max-width: 1199px) {
+	.o-modal > div:nth-child(2) {
+		display: flex !important;
+		flex-direction: row !important;
+		gap: 0 !important;
+		width: 95vw !important;
+		max-width: 95vw !important;
+		max-height: 90vh;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		/* Hide the horizontal scrollbar — the snap behavior is the
+		   affordance, no need for the scrollbar to take vertical space */
+		scrollbar-width: none;
+	}
+	.o-modal > div:nth-child(2)::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Each .pilot-modal / .mech-modal becomes a full-width "page"
+	   that snaps into view on swipe. EventModal only has one root
+	   so this rule still works for it (single page, nothing to swipe
+	   to). */
+	.pilot-modal,
+	.mech-modal,
+	.event-modal {
+		flex: 0 0 100% !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		max-height: 90vh;
+		overflow-y: auto;
+		scroll-snap-align: start;
+		scroll-snap-stop: always;
+		box-sizing: border-box;
+	}
+
+	/* Inside each pane, the data / portrait containers must drop
+	   their hard-coded desktop widths (min(888px, 52vw) etc.) so
+	   they fill the pane. Specificity needs to beat the base.css
+	   rules — using !important here for the same reason the existing
+	   responsive overrides do. */
+	.pilot-modal div.pilot,
+	.mech-modal div.mech,
+	.pilot-modal.portrait .pilot,
+	.mech-modal.portrait .mech,
+	.event-modal div.event {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+		margin-left: 0 !important;
+	}
+
+	/* Portrait <img> fills its dedicated page — bumped back up to
+	   75vh since it owns the whole pane and doesn't have to share
+	   vertical space with the data block any more. */
+	.pilot-modal.portrait img.portrait,
+	.mech-modal.portrait img.portrait {
+		width: 100% !important;
+		height: auto !important;
+		max-height: 75vh;
+		object-fit: contain;
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+/* ============================================
    MOBILE (max 767px)
    Full reflow: horizontal sidebar, stacked everything
    ============================================ */
@@ -639,12 +719,9 @@ body > canvas {
 	/* --- Pilot identity card (PilotsView grid item) --- */
 	.grid-item div.pilot,
 	.grid-item.portrait .pilot,
-	.pilot-modal div.pilot,
-	.pilot-modal.portrait .pilot,
-	.mech-modal div.mech,
+	.pilot-modal div.pilot div.markdown,
 	.event-modal div.event,
-	.event-modal div.event div.markdown,
-	.pilot-modal div.pilot div.markdown {
+	.event-modal div.event div.markdown {
 		width: 100% !important;
 		max-width: 100% !important;
 		height: auto !important;
@@ -663,38 +740,6 @@ body > canvas {
 		max-height: 60vh;
 		overflow-y: auto;
 		-webkit-overflow-scrolling: touch;
-	}
-
-	/* Portrait variants of PilotModal / MechModal carry their own
-	   `.mech-modal.portrait .mech` / `.pilot-modal.portrait .pilot`
-	   rules in _base.css that hard-code width: 600px. Those selectors
-	   beat the generic `.mech-modal div.mech` override above on
-	   specificity (3 classes vs 2 classes + 1 element), so on narrow
-	   viewports the portrait container holds 600px and the image
-	   inside spills past the screen edge. */
-	.pilot-modal.portrait .pilot,
-	.mech-modal.portrait .mech {
-		width: 100% !important;
-		max-width: 100% !important;
-	}
-
-	/* Portrait <img>: small thumbnail-style display rather than the
-	   full-bleed 70vh tower the previous pass used. Capped at 35vh so
-	   data + image together fit roughly within the viewport (markdown
-	   block scrolls internally at max-height: 60vh, image at 35vh, and
-	   the section-headers / titles add maybe 10-12vh of chrome) and
-	   Oruga's default flex-center layout doesn't need a separate
-	   scroll container. `object-fit: contain` keeps the whole picture
-	   visible at the natural aspect ratio. */
-	.pilot-modal.portrait img.portrait,
-	.mech-modal.portrait img.portrait {
-		width: auto !important;
-		height: auto !important;
-		max-width: 100%;
-		max-height: 35vh;
-		object-fit: contain;
-		display: block;
-		margin: 0 auto;
 	}
 
 	.pilot-identity .header {
@@ -738,12 +783,6 @@ body > canvas {
 	/* --- Modal wide cards --- */
 	.event-modal div.event div.markdown {
 		padding: 0 0.5em;
-	}
-
-	/* Stack modal siblings (main + portrait) vertically */
-	.o-modal > div:nth-child(2) {
-		flex-direction: column;
-		gap: 2em;
 	}
 
 	/* --- Reserve / Clock containers full width --- */
