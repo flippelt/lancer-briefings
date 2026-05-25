@@ -291,15 +291,21 @@ div.location-info {
 	flex-grow: 1;
 }
 
+/* `#gate` grows to fill the middle of row 2 the same way `#planet`
+   grows in row 1. Without this, system/gate/ring pack tight to the
+   right and `#ring` (last in DOM, leftmost visually under row-reverse)
+   ends up further inside the row than `#year` is in row 1 — they
+   stop reading as a single column. */
+.location-row #gate {
+	flex-grow: 1;
+	border-left: 1px solid var(--location-separator);
+}
+
 .location-row #year {
 	width: 75px;
 	border-left: 1px solid var(--location-separator);
 	padding-right: 0px;
 	height: 100;
-}
-
-.location-row #gate {
-	border-left: 1px solid var(--location-separator);
 }
 
 .location-row #ring {

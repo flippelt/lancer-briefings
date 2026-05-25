@@ -105,15 +105,16 @@ export default {
 	gap: 1.5em;
 }
 
-/* Title bar text — the global `section .section-header h2` rule only
-   matches when the bar is inside a <section> ancestor; this modal uses
-   a <div>, so we apply the same styling explicitly. */
+/* Title bar text — matches the Roboto typography of the buttons below
+   instead of the Big Shoulders Display used elsewhere, so the whole
+   modal reads as one coherent block. --on-primary keeps the text
+   legible against whichever theme color is showing on the bar. */
 .section-header h2 {
-	font-size: 26px;
+	font-size: 22px;
 	margin: 0;
 	align-self: center;
-	font-family: "Big Shoulders Display", cursive;
-	font-weight: 800;
+	font-family: "Roboto", sans-serif;
+	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
 	color: var(--on-primary);
