@@ -997,6 +997,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 
 .grid-item .rhombus-back {
@@ -1067,6 +1068,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 .pilot-modal .rhombus-back {
 	transform: skew(0.785398rad) !important;
@@ -1139,6 +1141,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 
 .mech-modal .rhombus-back {
@@ -1269,6 +1272,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 
 .event-modal .rhombus-back {
