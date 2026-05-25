@@ -665,18 +665,6 @@ body > canvas {
 		-webkit-overflow-scrolling: touch;
 	}
 
-	/* Oruga's `.o-modal` is `overflow: hidden` + flex-centered. When
-	   PilotModal / MechModal stack data + portrait vertically on a
-	   small screen, the combined height exceeds the viewport and the
-	   center alignment pushes the bottom — the portrait image —
-	   below the screen edge with no way to reach it. Anchor content
-	   to the top and let the modal itself scroll. */
-	.o-modal {
-		align-items: flex-start !important;
-		overflow-y: auto !important;
-		padding-bottom: 1em;
-	}
-
 	/* Portrait variants of PilotModal / MechModal carry their own
 	   `.mech-modal.portrait .mech` / `.pilot-modal.portrait .pilot`
 	   rules in _base.css that hard-code width: 600px. Those selectors
@@ -690,19 +678,23 @@ body > canvas {
 		max-width: 100% !important;
 	}
 
-	/* The portrait <img> uses `object-fit: cover` to fill its box,
-	   cropping anything that doesn't fit the box's aspect ratio.
-	   That works when the parent has a fixed 600x... shape, but on
-	   mobile the parent collapses to `height: auto` and the image
-	   ends up stretched / clipped at the top with no way to see the
-	   rest. Switch to `contain` and let the image set its own height
-	   from the natural aspect ratio of the source. */
+	/* Portrait <img>: small thumbnail-style display rather than the
+	   full-bleed 70vh tower the previous pass used. Capped at 35vh so
+	   data + image together fit roughly within the viewport (markdown
+	   block scrolls internally at max-height: 60vh, image at 35vh, and
+	   the section-headers / titles add maybe 10-12vh of chrome) and
+	   Oruga's default flex-center layout doesn't need a separate
+	   scroll container. `object-fit: contain` keeps the whole picture
+	   visible at the natural aspect ratio. */
 	.pilot-modal.portrait img.portrait,
 	.mech-modal.portrait img.portrait {
-		width: 100% !important;
+		width: auto !important;
 		height: auto !important;
-		max-height: 70vh;
+		max-width: 100%;
+		max-height: 35vh;
 		object-fit: contain;
+		display: block;
+		margin: 0 auto;
 	}
 
 	.pilot-identity .header {

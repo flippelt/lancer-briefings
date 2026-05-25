@@ -1091,14 +1091,18 @@ section .section-header h2 {
 	background-color: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -38px;
-	width: 888px;
+	/* min() lets the data half shrink with the viewport instead of
+	   staying at a hard 888px that overflows the page on anything
+	   smaller than ~1650px. The data + portrait pair plus the 5em
+	   gap stays under 95vw at 1366px and similar laptop sizes. */
+	width: min(888px, 52vw);
 	height: 662px;
 }
 .pilot-modal div.pilot div.markdown {
 	height: 662px;
 }
 .pilot-modal.portrait .pilot {
-	width: 600px;
+	width: min(600px, 33vw);
 }
 .pilot-modal.portrait img.portrait {
 	width: 100%;
@@ -1170,7 +1174,7 @@ section .section-header h2 {
 	background-color: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -38px;
-	width: 888px;
+	width: min(888px, 52vw);
 	height: 662px;
 	display: flex;
 	flex-direction: column;
@@ -1181,7 +1185,7 @@ section .section-header h2 {
 }
 
 .mech-modal.portrait .mech {
-	width: 600px;
+	width: min(600px, 33vw);
 }
 
 .mech-modal.portrait img.portrait {
@@ -1297,14 +1301,14 @@ section .section-header h2 {
 	background-color: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -38px;
-	width: 888px;
+	width: min(888px, 85vw);
 	height: 662px;
 }
 
 .event-modal div.event div.markdown {
 	height: 600px;
-	width: 888px;
-	margin-left: -18px;
+	width: 100%;
+	max-width: 888px;
 }
 
 .o-modal__overlay {
