@@ -7,45 +7,89 @@
 /*-------------------------------------*/
 /*--       Theme Customization       --*/
 /*-------------------------------------*/
+/*
+   Themes are driven by two independent <html> attributes:
+
+     <html data-theme="gms" data-mode="light">
+
+   - data-theme  picks a primary brand color (10 options)
+   - data-mode   picks light or dark surface tokens (text, panel bgs)
+
+   Defaults below are equivalent to data-theme="gms" data-mode="light"
+   so a fresh visit (or an old visitor with no localStorage) renders
+   the same as the historical Mirrorsmoke red-on-white look.
+*/
+
 :root {
-	/* Primary Colors */
-	--primary-color: rgba(153, 30, 42, 1);
+	/* --- Theme color (overridden by [data-theme=*] blocks) --- */
+	--primary-color: #991e2a;            /* default = "gms" red */
+	--on-primary: rgba(255, 255, 255, 1); /* contrasts with --primary-color */
+
+	/* --- Mode tokens (overridden by [data-mode="dark"]) --- */
 	--secondary-color: rgba(255, 255, 255, 1);
 	--highlight-hover: rgba(153, 0, 0, 0.3);
 	--highlight-active: rgba(0, 0, 0, 0.1);
-	/* Primary Text */
 	--text-headers: rgba(0, 0, 0, 1);
 	--text-location: rgba(0, 0, 0, 0.87);
-	/* Location Information */
 	--location-separator: rgba(0, 0, 0, 0.24);
-	/* Mission Pane */
 	--text-mission-title: rgba(0, 0, 0, 0.67);
 	--text-mission-status: rgba(255, 255, 255, 0.87);
 	--text-mission-name: rgba(0, 0, 0, 0.87);
+	--text-pilot-header: rgba(0, 0, 0, 0.67);
+	--text-pilot-value: rgba(0, 0, 0, 0.87);
+	--text-pilot-code: rgba(0, 0, 0, 0.70);
+	--text-markdown-p: rgba(0, 0, 0, 0.87);
+	--text-markdown-h1: rgba(0, 0, 0, 0.67);
+	--text-markdown-h2: rgba(0, 0, 0, 0.87);
+
+	/* --- Status colors (mode-agnostic) --- */
 	--mission-start: rgba(109, 109, 109, 1);
 	--mission-partial: rgba(88, 34, 102, 1);
 	--mission-success: rgba(34, 102, 98, 1);
 	--mission-failure: rgba(176, 45, 45, 1);
 	--primary-logo: rgba(255, 255, 255, 1);
-	--secondary-logo:rgba(255, 255, 255, 1);
-	/* Pilot Roster Text */
-	--text-pilot-header: rgba(0, 0, 0, 0.67);
-	--text-pilot-value: rgba(0, 0, 0, 0.87);
-	--text-pilot-code: rgba(0, 0, 0, 0.70);
-	/* Markdown (Current Assignment, Events Log, Pilot Biography) */
-	--text-markdown-p: rgba(0, 0, 0, 0.87);
-	--text-markdown-h1: rgba(0, 0, 0, 0.67);
-	--text-markdown-h2: rgba(0, 0, 0, 0.87);
-	/* Icons Color — applied via .filter-icon as background-color behind
-	   a mask-image. Default tracks --secondary-color so icons match the
-	   light-on-dark scheme; themes can override this single token to
-	   recolor every SVG icon at once. */
-	--icon-color: var(--secondary-color);
+	--secondary-logo: rgba(255, 255, 255, 1);
+
+	/* Icon mask color tracks --on-primary so SVG icons stay legible
+	   against their colored bars regardless of mode. */
+	--icon-color: var(--on-primary);
 
 	/* For Firefox */
 	scrollbar-color: var(--primary-color) transparent !important;
 	scrollbar-width: thin;
 }
+
+/* ===== Dark mode ===== */
+[data-mode="dark"] {
+	--secondary-color: #161c1dcc;
+	--highlight-hover: rgba(255, 255, 255, 0.3);
+	--highlight-active: rgba(255, 255, 255, 0.1);
+	--text-headers: rgba(0, 0, 0, 1);
+	--text-location: rgba(255, 255, 255, 0.87);
+	--location-separator: rgba(255, 255, 255, 0.24);
+	--text-mission-title: rgba(255, 255, 255, 0.67);
+	--text-mission-status: rgba(255, 255, 255, 0.87);
+	--text-mission-name: rgba(255, 255, 255, 0.87);
+	--text-pilot-header: rgba(255, 255, 255, 0.67);
+	--text-pilot-value: rgba(255, 255, 255, 0.87);
+	--text-pilot-code: rgba(255, 255, 255, 0.47);
+	--text-markdown-p: rgba(255, 255, 255, 0.87);
+	--text-markdown-h1: rgba(255, 255, 255, 0.67);
+	--text-markdown-h2: rgba(255, 255, 255, 0.87);
+}
+
+/* ===== Theme palette (only --primary-color, and --on-primary when
+   the primary is too light for white text) ===== */
+[data-theme="albatross"] { --primary-color: #ca1510; }
+[data-theme="galsin"]    { --primary-color: #e36600; }
+[data-theme="gms"]       { --primary-color: #991e2a; }
+[data-theme="ha"]        { --primary-color: #771675; }
+[data-theme="horus"]     { --primary-color: #126127; }
+[data-theme="ipsn"]      { --primary-color: #1952a2; }
+[data-theme="karrakin"]  { --primary-color: #996414; }
+[data-theme="msmc"]      { --primary-color: #7dbbbb; --on-primary: #161c1d; }
+[data-theme="ssc"]       { --primary-color: #d1920a; }
+[data-theme="voladores"] { --primary-color: #b87333; }
 
 html {
 	overflow: overlay;
@@ -111,7 +155,7 @@ header {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.15em;
-	color: var(--secondary-color);
+	color: var(--on-primary);
 }
 
 .title #title-subheader {
@@ -123,7 +167,7 @@ header {
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
 	padding-left: 0.32em;
-	color: var(--secondary-color);
+	color: var(--on-primary);
 }
 
 .title #subtitle-header {
@@ -134,7 +178,7 @@ header {
 	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
-	color: var(--secondary-color);
+	color: var(--on-primary);
 }
 
 .title #subtitle-subheader {
@@ -145,7 +189,7 @@ header {
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.02em;
-	color: var(--secondary-color);
+	color: var(--on-primary);
 }
 
 .logo {
@@ -308,7 +352,7 @@ div.location-info {
 	align-items: center;
 	margin-bottom: 1em;
 	text-decoration: none;
-	color: var(--secondary-color);
+	color: var(--on-primary);
 }
 
 .sidebar-layout a.router-link-exact-active {
@@ -425,7 +469,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	color: var(--secondary-color);
+	color: var(--on-primary);
 }
 
 .section-content-container {
@@ -1564,7 +1608,7 @@ div.markdown ol li {
 
 .pilot-identity .header {
 	background: var(--primary-color);
-	color: var(--secondary-color);
+	color: var(--on-primary);
 	font-size: 32px;
 	margin: 0%;
 	align-self: center;
