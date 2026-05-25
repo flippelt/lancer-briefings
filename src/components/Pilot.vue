@@ -17,14 +17,7 @@
               <div class="col">CALLSIGN AVAILABLE <br> IDENTITY
                 VERIFIED <br> PH/HR DATA REGISTERED</div>
             </div>
-            <div style="padding-top:5px"> FRAME CONFIGURATION OPTIONS <span class="subtle--text">("H.A.S.E"
-                OMNINET VAULT REMIT)</span></div>
-            <div class="row" style="padding-top:5px"><span style="font-size: 22px; line-height: 15px;"> [
-                HULL: <span class="stat-text accent--text" style="font-size: 24px;"> {{ pilot.mechSkills[0] }} </span>
-                AGI: <span class="stat-text accent--text" style="font-size: 24px;"> {{ pilot.mechSkills[1] }} </span>
-                SYS: <span class="stat-text accent--text" style="font-size: 24px;"> {{ pilot.mechSkills[2] }} </span>
-                ENG: <span class="stat-text accent--text" style="font-size: 24px;"> {{ pilot.mechSkills[3] }} </span> ]
-              </span></div>
+            <PilotStatsBlock :pilot="pilot" />
             <div class="row flex-container-cols">
               <div class="col col-share">
                 <span>PILOT SKILL TRIGGER AUDIT</span>
@@ -140,6 +133,7 @@ import ProgressBar from '@/components/ProgressBar.vue'
 import Burden from '@/components/Burden.vue'
 
 import PilotIdentityHeader from '@/components/pilot/PilotIdentityHeader.vue'
+import PilotStatsBlock from '@/components/pilot/PilotStatsBlock.vue'
 
 export default {
   components: {
@@ -147,6 +141,7 @@ export default {
     ProgressBar,
     Typer,
     PilotIdentityHeader,
+    PilotStatsBlock,
   },
   props: {
     animate: {
