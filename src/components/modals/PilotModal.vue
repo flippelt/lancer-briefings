@@ -2,7 +2,7 @@
 	<div class="pilot-modal">
 		<div class="pilot-header-container">
 			<div class="section-header clipped-medium-backward-bio">
-				<img src="/icons/pilot.svg" />
+				<i class="filter-icon" style="--icon-url: url('/icons/pilot.svg')"></i>
 				<h2>{{ pilot.name }} [{{ pilot.callsign }}]</h2>
 			</div>
 			<div class="rhombus-back">&nbsp;</div>
@@ -14,7 +14,7 @@
 	<div class="pilot-modal portrait">
 		<div class="pilot-header-container">
 			<div class="section-header clipped-medium-backward-pilot">
-				<img src="/icons/portrait.svg" />
+				<i class="filter-icon" style="--icon-url: url('/icons/portrait.svg')"></i>
 				<h2>Pilot Artwork</h2>
 			</div>
 			<div class="rhombus-back">&nbsp;</div>
@@ -27,6 +27,7 @@
 
 <script>
 import { VueMarkdownIt } from '@f3ve/vue-markdown-it';
+import { setupSwipeDots } from '@/composables/swipeDots';
 
 export default {
 	components: {
@@ -42,6 +43,7 @@ export default {
 	data() {
 		return {
 			markdownHtml: true,
+			swipeDotsCleanup: null,
 		};
 	},
 	computed: {
@@ -51,6 +53,12 @@ export default {
     mechPortrait() {
       return `/mechs/${this.pilot.callsign}.webp`
     },
+	},
+	mounted() {
+		this.swipeDotsCleanup = setupSwipeDots(this.$el);
+	},
+	beforeUnmount() {
+		if (this.swipeDotsCleanup) this.swipeDotsCleanup();
 	},
 	methods: {
 		getHistory(){

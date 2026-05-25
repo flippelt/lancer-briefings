@@ -466,7 +466,13 @@ section .section-header {
 
 
 
-section .section-header .filter-icon {
+/* Section-header icon sizing — `.section-header` shows up both inside
+   <section> wrappers (StatusView / EventsView) and inside plain <div>s
+   (the modal headers in PilotModal / MechModal / EventModal / Settings),
+   so the selector intentionally omits the `section` ancestor that the
+   original `section .section-header img` rule required. Without this,
+   modal icons render at 0x0. */
+.section-header .filter-icon {
 	width: 36px;
 	height: 36px;
 	align-self: center;
@@ -997,6 +1003,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 
 .grid-item .rhombus-back {
@@ -1067,6 +1074,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 .pilot-modal .rhombus-back {
 	transform: skew(0.785398rad) !important;
@@ -1083,14 +1091,18 @@ section .section-header h2 {
 	background-color: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -38px;
-	width: 888px;
+	/* min() lets the data half shrink with the viewport instead of
+	   staying at a hard 888px that overflows the page on anything
+	   smaller than ~1650px. The data + portrait pair plus the 5em
+	   gap stays under 95vw at 1366px and similar laptop sizes. */
+	width: min(888px, 52vw);
 	height: 662px;
 }
 .pilot-modal div.pilot div.markdown {
 	height: 662px;
 }
 .pilot-modal.portrait .pilot {
-	width: 600px;
+	width: min(600px, 33vw);
 }
 .pilot-modal.portrait img.portrait {
 	width: 100%;
@@ -1139,6 +1151,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 
 .mech-modal .rhombus-back {
@@ -1161,7 +1174,7 @@ section .section-header h2 {
 	background-color: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -38px;
-	width: 888px;
+	width: min(888px, 52vw);
 	height: 662px;
 	display: flex;
 	flex-direction: column;
@@ -1172,7 +1185,7 @@ section .section-header h2 {
 }
 
 .mech-modal.portrait .mech {
-	width: 600px;
+	width: min(600px, 33vw);
 }
 
 .mech-modal.portrait img.portrait {
@@ -1269,6 +1282,7 @@ section .section-header h2 {
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	color: var(--on-primary);
 }
 
 .event-modal .rhombus-back {
@@ -1287,14 +1301,14 @@ section .section-header h2 {
 	background-color: var(--secondary-color);
 	border: 1px solid var(--primary-color);
 	margin-top: -38px;
-	width: 888px;
+	width: min(888px, 85vw);
 	height: 662px;
 }
 
 .event-modal div.event div.markdown {
 	height: 600px;
-	width: 888px;
-	margin-left: -18px;
+	width: 100%;
+	max-width: 888px;
 }
 
 .o-modal__overlay {

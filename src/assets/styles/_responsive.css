@@ -349,6 +349,144 @@ body > canvas {
 }
 
 /* ============================================
+   MODAL SWIPE CAROUSEL (max 1199px — mobile + tablet)
+   PilotModal and MechModal each have two root <div> elements (data
+   + portrait artwork). On desktop they sit side-by-side via the
+   flex+gap rule in _base.css. On smaller viewports there isn't room
+   for both, so we re-purpose the same wrapper into a horizontal
+   scroll-snap carousel: each pane gets 100% of the wrapper width,
+   and the user swipes left/right to switch between data and image.
+
+   Implementation uses CSS scroll-snap — no JS needed. The browser
+   handles momentum, snap points, and accessibility (keyboard arrow
+   keys move between snap points when the wrapper is focused).
+   ============================================ */
+@media (max-width: 1199px) {
+	.o-modal > div:nth-child(2) {
+		display: flex !important;
+		flex-direction: row !important;
+		gap: 0 !important;
+		width: 95vw !important;
+		max-width: 95vw !important;
+		max-height: 90vh;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		/* Hide the horizontal scrollbar — the snap behavior is the
+		   affordance, no need for the scrollbar to take vertical space */
+		scrollbar-width: none;
+	}
+	.o-modal > div:nth-child(2)::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Each .pilot-modal / .mech-modal becomes a full-width "page"
+	   that snaps into view on swipe. EventModal only has one root
+	   so this rule still works for it (single page, nothing to swipe
+	   to). */
+	.pilot-modal,
+	.mech-modal,
+	.event-modal {
+		flex: 0 0 100% !important;
+		width: 100% !important;
+		max-width: 100% !important;
+		max-height: 90vh;
+		overflow-y: auto;
+		scroll-snap-align: start;
+		scroll-snap-stop: always;
+		box-sizing: border-box;
+	}
+
+	/* Inside each pane, the data / portrait containers must drop
+	   their hard-coded desktop widths (min(888px, 52vw) etc.) so
+	   they fill the pane. Specificity needs to beat the base.css
+	   rules — using !important here for the same reason the existing
+	   responsive overrides do. */
+	.pilot-modal div.pilot,
+	.mech-modal div.mech,
+	.pilot-modal.portrait .pilot,
+	.mech-modal.portrait .mech,
+	.event-modal div.event {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+		margin-left: 0 !important;
+	}
+
+	/* Portrait <img> fills its dedicated page — bumped back up to
+	   75vh since it owns the whole pane and doesn't have to share
+	   vertical space with the data block any more. */
+	.pilot-modal.portrait img.portrait,
+	.mech-modal.portrait img.portrait {
+		width: 100% !important;
+		height: auto !important;
+		max-height: 75vh;
+		object-fit: contain;
+		display: block;
+		margin: 0 auto;
+	}
+
+	/* `.mech-modal .mech-column { display: flex; flex-direction: row }`
+	   from _base.css makes the gear-rows (main / flex / heavy mounts
+	   and systems) lay out side-by-side. That works in the 888px-wide
+	   desktop modal, but inside a 95vw mobile pane it overflows
+	   horizontally — the user perceives the overflow as extra swipe
+	   pages bleeding past the snap point. Stack columns vertically so
+	   each pane has a clean single-axis layout. */
+	.mech-modal .mech-column {
+		flex-direction: column !important;
+	}
+	.mech-column .gear-row.mech-system {
+		flex-direction: column !important;
+	}
+
+	/* --- Pagination dots indicator (modal swipe carousel) ---
+	   Injected via JS in PilotModal/MechModal mounted hooks; styled
+	   here. Positioned fixed at the bottom-center of the viewport so
+	   they overlay whatever the user is swiping through. */
+	.modal-swipe-dots {
+		position: fixed;
+		bottom: 1.25em;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1001;
+		display: flex;
+		gap: 0.5em;
+		padding: 0.5em 0.85em;
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 999px;
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		pointer-events: auto;
+	}
+
+	.modal-swipe-dot {
+		width: 10px;
+		height: 10px;
+		padding: 0;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.4);
+		border: none;
+		cursor: pointer;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+
+	.modal-swipe-dot.active {
+		background: #ffffff;
+		transform: scale(1.25);
+	}
+}
+
+/* Hide pagination dots on desktop — the data + portrait sit
+   side-by-side there and there's nothing to paginate. */
+@media (min-width: 1200px) {
+	.modal-swipe-dots {
+		display: none !important;
+	}
+}
+
+/* ============================================
    MOBILE (max 767px)
    Full reflow: horizontal sidebar, stacked everything
    ============================================ */
@@ -549,7 +687,7 @@ body > canvas {
 		min-width: 0;
 	}
 
-	section .section-header .filter-icon {
+	.section-header .filter-icon {
 		width: 28px;
 		height: 28px;
 		flex: 0 0 auto;
@@ -639,12 +777,9 @@ body > canvas {
 	/* --- Pilot identity card (PilotsView grid item) --- */
 	.grid-item div.pilot,
 	.grid-item.portrait .pilot,
-	.pilot-modal div.pilot,
-	.pilot-modal.portrait .pilot,
-	.mech-modal div.mech,
+	.pilot-modal div.pilot div.markdown,
 	.event-modal div.event,
-	.event-modal div.event div.markdown,
-	.pilot-modal div.pilot div.markdown {
+	.event-modal div.event div.markdown {
 		width: 100% !important;
 		max-width: 100% !important;
 		height: auto !important;
@@ -703,15 +838,23 @@ body > canvas {
 		gap: 0.5em;
 	}
 
+	/* HASE stats row uses inline `font-size: 22px` on the outer span
+	   and `font-size: 24px` on each stat number. On phones narrower
+	   than ~412px (Galaxy S25 family) the bracketed `[ HULL: X AGI: Y
+	   SYS: Z ENG: W ]` runs longer than the line width and the
+	   closing `1 ]` wraps onto its own line. Override the inline sizes
+	   via attribute-substring selectors so the row holds together. */
+	.pilot-identity span[style*="font-size: 22px"] {
+		font-size: 18px !important;
+		line-height: 1.3 !important;
+	}
+	.pilot-identity span[style*="font-size: 24px"] {
+		font-size: 20px !important;
+	}
+
 	/* --- Modal wide cards --- */
 	.event-modal div.event div.markdown {
 		padding: 0 0.5em;
-	}
-
-	/* Stack modal siblings (main + portrait) vertically */
-	.o-modal > div:nth-child(2) {
-		flex-direction: column;
-		gap: 2em;
 	}
 
 	/* --- Reserve / Clock containers full width --- */

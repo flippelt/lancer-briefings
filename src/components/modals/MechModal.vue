@@ -2,7 +2,7 @@
   <div class="mech-modal">
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-bio">
-        <img src="/icons/npc.svg">
+        <i class="filter-icon" style="--icon-url: url('/icons/npc.svg')"></i>
         <h2>{{ mech.name }} [{{ mech.frame_name }}]</h2>
       </div>
       <div class="rhombus-back"></div>
@@ -50,7 +50,7 @@
   <div class="mech-modal portrait">
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-mech">
-        <img src="/icons/mech.svg">
+        <i class="filter-icon" style="--icon-url: url('/icons/mech.svg')"></i>
         <h2>Mech Artwork</h2>
       </div>
       <div class="rhombus-back">
@@ -65,6 +65,7 @@
 
 <script>
 import { VueMarkdownIt } from '@f3ve/vue-markdown-it';
+import { setupSwipeDots } from '@/composables/swipeDots';
 
 export default {
   components: {
@@ -100,9 +101,13 @@ export default {
       flexMounts: [],
       heavyMounts: [],
       mechSystems: [],
+      swipeDotsCleanup: null,
     }
   },
   beforeUpdate() {
+  },
+  beforeUnmount() {
+    if (this.swipeDotsCleanup) this.swipeDotsCleanup();
   },
   mounted() {
     if (this.mech) {
@@ -113,6 +118,7 @@ export default {
     }
     if (this.systemsData)
       this.getMechSystems();
+    this.swipeDotsCleanup = setupSwipeDots(this.$el);
   },
   computed: {
     pilotPortrait() {
