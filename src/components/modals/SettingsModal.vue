@@ -105,14 +105,30 @@ export default {
 	gap: 1.5em;
 }
 
-.settings-group h3 {
+/* Title bar text — the global `section .section-header h2` rule only
+   matches when the bar is inside a <section> ancestor; this modal uses
+   a <div>, so we apply the same styling explicitly. */
+.section-header h2 {
+	font-size: 26px;
+	margin: 0;
+	align-self: center;
 	font-family: "Big Shoulders Display", cursive;
 	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
-	font-size: 18px;
-	margin: 0 0 0.5em 0;
-	color: var(--text-headers);
+	color: var(--on-primary);
+}
+
+/* Group labels — match the Roboto pattern used by the buttons below,
+   tracking --text-markdown-p so they flip light/dark with the mode. */
+.settings-group h3 {
+	font-family: "Roboto", sans-serif;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	font-size: 14px;
+	margin: 0 0 0.75em 0;
+	color: var(--text-markdown-p);
 }
 
 /* --- Mode toggle --- */
