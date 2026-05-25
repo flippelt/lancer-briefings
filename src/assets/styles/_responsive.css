@@ -426,6 +426,64 @@ body > canvas {
 		display: block;
 		margin: 0 auto;
 	}
+
+	/* `.mech-modal .mech-column { display: flex; flex-direction: row }`
+	   from _base.css makes the gear-rows (main / flex / heavy mounts
+	   and systems) lay out side-by-side. That works in the 888px-wide
+	   desktop modal, but inside a 95vw mobile pane it overflows
+	   horizontally — the user perceives the overflow as extra swipe
+	   pages bleeding past the snap point. Stack columns vertically so
+	   each pane has a clean single-axis layout. */
+	.mech-modal .mech-column {
+		flex-direction: column !important;
+	}
+	.mech-column .gear-row.mech-system {
+		flex-direction: column !important;
+	}
+
+	/* --- Pagination dots indicator (modal swipe carousel) ---
+	   Injected via JS in PilotModal/MechModal mounted hooks; styled
+	   here. Positioned fixed at the bottom-center of the viewport so
+	   they overlay whatever the user is swiping through. */
+	.modal-swipe-dots {
+		position: fixed;
+		bottom: 1.25em;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1001;
+		display: flex;
+		gap: 0.5em;
+		padding: 0.5em 0.85em;
+		background: rgba(0, 0, 0, 0.6);
+		border-radius: 999px;
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		pointer-events: auto;
+	}
+
+	.modal-swipe-dot {
+		width: 10px;
+		height: 10px;
+		padding: 0;
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.4);
+		border: none;
+		cursor: pointer;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+
+	.modal-swipe-dot.active {
+		background: #ffffff;
+		transform: scale(1.25);
+	}
+}
+
+/* Hide pagination dots on desktop — the data + portrait sit
+   side-by-side there and there's nothing to paginate. */
+@media (min-width: 1200px) {
+	.modal-swipe-dots {
+		display: none !important;
+	}
 }
 
 /* ============================================
@@ -778,6 +836,20 @@ body > canvas {
 	.pilot-identity .biometrics-container {
 		flex-direction: column;
 		gap: 0.5em;
+	}
+
+	/* HASE stats row uses inline `font-size: 22px` on the outer span
+	   and `font-size: 24px` on each stat number. On phones narrower
+	   than ~412px (Galaxy S25 family) the bracketed `[ HULL: X AGI: Y
+	   SYS: Z ENG: W ]` runs longer than the line width and the
+	   closing `1 ]` wraps onto its own line. Override the inline sizes
+	   via attribute-substring selectors so the row holds together. */
+	.pilot-identity span[style*="font-size: 22px"] {
+		font-size: 18px !important;
+		line-height: 1.3 !important;
+	}
+	.pilot-identity span[style*="font-size: 24px"] {
+		font-size: 20px !important;
 	}
 
 	/* --- Modal wide cards --- */

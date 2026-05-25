@@ -27,6 +27,7 @@
 
 <script>
 import { VueMarkdownIt } from '@f3ve/vue-markdown-it';
+import { setupSwipeDots } from '@/composables/swipeDots';
 
 export default {
 	components: {
@@ -42,6 +43,7 @@ export default {
 	data() {
 		return {
 			markdownHtml: true,
+			swipeDotsCleanup: null,
 		};
 	},
 	computed: {
@@ -51,6 +53,12 @@ export default {
     mechPortrait() {
       return `/mechs/${this.pilot.callsign}.webp`
     },
+	},
+	mounted() {
+		this.swipeDotsCleanup = setupSwipeDots(this.$el);
+	},
+	beforeUnmount() {
+		if (this.swipeDotsCleanup) this.swipeDotsCleanup();
 	},
 	methods: {
 		getHistory(){
