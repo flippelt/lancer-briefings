@@ -665,6 +665,18 @@ body > canvas {
 		-webkit-overflow-scrolling: touch;
 	}
 
+	/* Oruga's `.o-modal` is `overflow: hidden` + flex-centered. When
+	   PilotModal / MechModal stack data + portrait vertically on a
+	   small screen, the combined height exceeds the viewport and the
+	   center alignment pushes the bottom — the portrait image —
+	   below the screen edge with no way to reach it. Anchor content
+	   to the top and let the modal itself scroll. */
+	.o-modal {
+		align-items: flex-start !important;
+		overflow-y: auto !important;
+		padding-bottom: 1em;
+	}
+
 	/* Portrait variants of PilotModal / MechModal carry their own
 	   `.mech-modal.portrait .mech` / `.pilot-modal.portrait .pilot`
 	   rules in _base.css that hard-code width: 600px. Those selectors
