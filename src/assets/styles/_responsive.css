@@ -1,0 +1,751 @@
+/*-------------------------------------*/
+/*--          Responsive Layout      --*/
+/*-------------------------------------*/
+/*
+   Breakpoints:
+   - Mobile:         max-width 767px
+   - Tablet:         768px – 1023px
+   - Small desktop:  1024px – 1599px
+   - Desktop:        1600px+ (default, unchanged)
+*/
+
+/* ============================================
+   Stacking: keep app content above the Vanta background canvas
+   (canvas is appended to <body> by the script in index.html;
+    Vanta sets it inline to position:absolute; z-index:0 with
+    setClearColor(0xffffff) — opaque white — which would cover
+    everything in body. Force it behind, viewport-locked.)
+   ============================================ */
+body > canvas {
+	position: fixed !important;
+	top: 0 !important;
+	left: 0 !important;
+	z-index: -1 !important;
+	pointer-events: none !important;
+}
+
+#app {
+	position: relative;
+	z-index: 1;
+	background: transparent;
+}
+
+/* ============================================
+   ALL VIEWPORTS < 1600px
+   Allow vertical scroll, prevent horizontal overflow
+   ============================================ */
+@media (max-width: 1599px) {
+	#app {
+		overflow-x: hidden !important;
+		overflow-y: auto !important;
+	}
+}
+
+/* ============================================
+   HAMBURGER TOGGLE (always present in DOM, hidden by default)
+   Only shown on mobile (≤767px)
+   ============================================ */
+.sidebar-toggle {
+	display: none;
+	position: fixed;
+	top: 12px;
+	right: 12px;
+	z-index: 1001;
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	background: var(--primary-color);
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-toggle span {
+	display: block;
+	width: 22px;
+	height: 3px;
+	background: var(--secondary-color);
+	border-radius: 2px;
+	transition: transform 0.25s ease, opacity 0.2s ease;
+}
+
+.sidebar-toggle.open span:nth-child(1) {
+	transform: translateY(8px) rotate(45deg);
+}
+
+.sidebar-toggle.open span:nth-child(2) {
+	opacity: 0;
+}
+
+.sidebar-toggle.open span:nth-child(3) {
+	transform: translateY(-8px) rotate(-45deg);
+}
+
+.sidebar-overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.55);
+	z-index: 999;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+	pointer-events: none;
+}
+
+.sidebar-overlay.open {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+/* ============================================
+   SMALL DESKTOP (1024px – 1599px)
+   Scale wide sections + wrap StatusView so iPad Pro
+   (1024 portrait / 1366 landscape) doesn't hide modules
+   ============================================ */
+@media (max-width: 1599px) {
+	section.section-container#pilots {
+		width: calc(100vw - 90px - 60px);
+		max-width: 1755px;
+	}
+
+	section.section-container#events-logs {
+		width: calc(100vw - 90px - 393px - 120px);
+		min-width: 600px;
+		max-width: 1179px;
+	}
+
+	.grid-item div.pilot,
+	.pilot-modal div.pilot,
+	.mech-modal div.mech,
+	.event-modal div.event {
+		max-width: 100%;
+	}
+
+	/* StatusView: 3 flex children → wrap when there's no room.
+	   missions + assignment share row 1, reserves/clocks wrapper
+	   drops to row 2 at full width. */
+	#status.content-container {
+		flex-wrap: wrap;
+		align-items: flex-start;
+	}
+
+	section.section-container#missions {
+		width: 360px;
+		min-width: 320px;
+		flex: 0 0 auto;
+	}
+
+	section.section-container#assignment {
+		flex: 1 1 500px;
+		width: auto;
+		min-width: 420px;
+		max-width: none;
+	}
+
+	#status > div {
+		flex: 1 1 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 30px;
+		margin: 0 30px;
+	}
+
+	section.section-container#reserves,
+	section.section-container#clocks {
+		flex: 1 1 calc(50% - 30px);
+		width: auto;
+		max-width: calc(50% - 30px);
+		min-width: 320px;
+		margin: 15px 0;
+	}
+}
+
+/* ============================================
+   TABLET / iPad range (max 1199px)
+   - Header stacks vertically (title 700px would collide
+     with absolute planet-location box otherwise)
+   - Sidebar becomes fixed full-height with padding-top to
+     clear the now-taller header, while header floats on top
+     via z-index
+   - Router-view-container leaves absolute positioning and
+     flows below the header
+   ============================================ */
+@media (max-width: 1199px) {
+	.page-wrapper {
+		height: auto;
+		min-height: 0;
+	}
+
+	.sidebar-page {
+		flex: 0 0 auto;
+	}
+
+	header {
+		height: auto;
+		flex-direction: column;
+		align-items: stretch;
+		position: relative;
+		z-index: 5;
+	}
+
+	.title {
+		width: 100%;
+		height: auto;
+		padding: 0.5em 0.75em;
+		box-sizing: border-box;
+		-webkit-mask: none !important;
+		mask: none !important;
+		clip-path: none !important;
+		-webkit-clip-path: none !important;
+	}
+
+	.rhombus {
+		display: none;
+	}
+
+	.planet-location-container {
+		position: static;
+		right: auto;
+		width: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		background: var(--secondary-color);
+		padding: 0.5em 0.75em;
+		box-sizing: border-box;
+	}
+
+	header video {
+		width: 72px;
+		height: 72px;
+	}
+
+	div .location-info {
+		margin-left: 12px;
+		padding: 4px;
+		flex: 1;
+		align-items: flex-start;
+	}
+
+	.location-row {
+		height: auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.o-side__content {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		height: 100vh;
+		padding-top: 220px;
+		z-index: 1;
+		box-sizing: border-box;
+	}
+
+	div#router-view-container {
+		position: static;
+		top: auto;
+		left: auto;
+		margin-left: 90px;
+		padding-bottom: 2em;
+		width: calc(100vw - 90px);
+		box-sizing: border-box;
+	}
+}
+
+/* ============================================
+   TABLET (max 1023px)
+   Sections stack to single column (layout/sidebar/header
+   handled by the ≤1199px block above)
+   ============================================ */
+@media (max-width: 1023px) {
+	/* Status view: 4 sections wrap into columns */
+	#status.content-container {
+		flex-wrap: wrap;
+	}
+
+	#status > div {
+		flex-direction: column;
+		margin: 0;
+		gap: 0;
+	}
+
+	section.section-container,
+	section.section-container#missions,
+	section.section-container#assignment,
+	section.section-container#reserves,
+	section.section-container#clocks,
+	section.section-container#events-logs,
+	section.section-container#pilots {
+		width: calc(100% - 40px);
+		max-width: calc(100% - 40px);
+		min-width: 0;
+		flex: 1 1 100%;
+		height: auto;
+		margin: 20px;
+		box-sizing: border-box;
+	}
+
+	section.section-container#assignment {
+		min-height: 500px;
+	}
+
+	section.section-container#reserves,
+	section.section-container#clocks {
+		min-height: 380px;
+	}
+
+	#eventsView.content-container {
+		flex-direction: column;
+	}
+
+	/* Mission list and event list adjust to flexible height */
+	.mission-list-container,
+	.event-list-container,
+	.events-list-container,
+	.reserves-list-container,
+	.clocks-list-container {
+		max-height: 500px;
+		height: auto;
+	}
+
+	/* Pilot card: keep usable on tablet */
+	.grid-item div.pilot,
+	.grid-item.portrait .pilot {
+		width: 100%;
+		height: auto;
+	}
+
+	.pilot-identity .pilot-image-container,
+	.pilot-identity .pilot-image-border {
+		width: 200px;
+		height: 200px;
+	}
+}
+
+/* ============================================
+   MOBILE (max 767px)
+   Full reflow: horizontal sidebar, stacked everything
+   ============================================ */
+@media (max-width: 767px) {
+	/* --- App / page wrapper --- */
+	.page-wrapper {
+		height: auto;
+		min-height: 0;
+	}
+
+	/* --- Header --- */
+	header {
+		height: auto;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.title {
+		width: 100%;
+		height: auto;
+		padding: 0.6em 0.5em;
+		box-sizing: border-box;
+		-webkit-mask: none !important;
+		mask: none !important;
+		clip-path: none !important;
+		-webkit-clip-path: none !important;
+	}
+
+	.title #title-header,
+	.title #title-subheader {
+		font-size: 22px;
+	}
+
+	.title #subtitle-header,
+	.title #subtitle-subheader {
+		font-size: 16px;
+	}
+
+	.logo {
+		width: 40px;
+		height: 60px;
+		margin-left: 8px;
+	}
+
+	.rhombus {
+		display: none;
+	}
+
+	.planet-location-container {
+		position: static;
+		right: auto;
+		width: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		background: var(--secondary-color);
+		padding: 0.5em;
+		box-sizing: border-box;
+	}
+
+	header video {
+		width: 56px;
+		height: 56px;
+	}
+
+	div .location-info {
+		margin-left: 8px;
+		padding: 4px;
+		flex: 1;
+		align-items: flex-start;
+	}
+
+	.location-row {
+		height: auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.location-row div {
+		padding: 0 8px;
+	}
+
+	.location-row .subtitle {
+		font-size: 14px;
+	}
+
+	.location-row h4 {
+		font-size: 9px;
+	}
+
+	.location-row #year,
+	.location-row #ring {
+		width: auto;
+	}
+
+	/* --- Sidebar: hamburger drawer --- */
+	.sidebar-toggle {
+		display: flex;
+	}
+
+	.sidebar-overlay {
+		display: block;
+	}
+
+	.sidebar-page {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		width: 220px;
+		max-width: 80vw;
+		z-index: 1000;
+		transform: translateX(-100%);
+		transition: transform 0.28s ease;
+	}
+
+	.sidebar-page.open {
+		transform: translateX(0);
+	}
+
+	.sidebar-layout {
+		min-height: 100vh;
+		height: 100vh;
+	}
+
+	.o-side__content {
+		width: 100% !important;
+		height: 100% !important;
+		padding-top: 4em !important;
+		padding-right: 0 !important;
+		box-sizing: border-box;
+	}
+
+	.sidebar-layout a,
+	.sidebar-layout a:visited,
+	.sidebar-layout a.router-link-exact-active {
+		flex-direction: row;
+		justify-content: flex-start;
+		gap: 0.75em;
+		padding: 0.75em 1em;
+		margin-bottom: 0.25em;
+		font-size: 14px;
+		clip-path: none !important;
+		-webkit-clip-path: none !important;
+	}
+
+	.sidebar-layout img {
+		width: 28px;
+		height: 28px;
+	}
+
+	/* --- Router-view container --- */
+	div#router-view-container {
+		position: static;
+		top: auto;
+		left: auto;
+		margin: 0;
+		padding: 0 8px 2em 8px;
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* --- Content rows stack vertically --- */
+	.content-container {
+		flex-direction: column !important;
+	}
+
+	section.section-container,
+	section.section-container#assignment,
+	section.section-container#events-logs,
+	section.section-container#reserves,
+	section.section-container#clocks,
+	section.section-container#pilots {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+		min-height: 0 !important;
+		margin: 15px 0 !important;
+		padding: 0 !important;
+		box-sizing: border-box;
+	}
+
+	section .section-header {
+		height: 44px;
+		padding-left: 12px;
+		gap: 10px;
+	}
+
+	section .section-header h1 {
+		font-size: 20px;
+	}
+
+	section .section-header img {
+		width: 28px;
+		height: 28px;
+	}
+
+	/* List containers expand naturally */
+	.mission-list-container,
+	.event-list-container,
+	.events-list-container,
+	.reserves-list-container,
+	.clocks-list-container {
+		height: auto !important;
+		max-height: 60vh;
+	}
+
+	/* --- Clipped backward bars: shorter slant on mobile --- */
+	.clipped-medium-backward {
+		clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 100%, 0% 100%);
+		-webkit-clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 100%, 0% 100%);
+	}
+
+	.clipped-medium-backward-events-logs,
+	.clipped-medium-backward-pilot,
+	.clipped-medium-backward-mech,
+	.clipped-medium-backward-bio {
+		width: 100% !important;
+		max-width: 100%;
+		clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 100%, 0% 100%) !important;
+		-webkit-clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 100%, 0% 100%) !important;
+		margin-right: 0 !important;
+	}
+
+	/* --- Mission row: wrap status to next line --- */
+	.mission {
+		flex-wrap: wrap;
+		margin-left: 0.5em;
+		margin-right: 0.25em;
+		padding-left: 0.5em;
+	}
+
+	.mission .name {
+		flex: 1 1 60%;
+	}
+
+	.mission .status {
+		width: auto;
+		min-width: 110px;
+		font-size: 11px;
+		padding: 0.5em;
+	}
+
+	.mission h2 {
+		font-size: 16px;
+	}
+
+	/* --- Pilot wrapper (Status view person rows) --- */
+	.pilot-wrapper {
+		flex-direction: column;
+		height: auto;
+		gap: 1em;
+		align-items: flex-start;
+	}
+
+	.pilot-wrapper .pilot-column,
+	.pilot-wrapper .gear-column,
+	.pilot-wrapper .bonds-column,
+	.pilot-wrapper .mech-column {
+		margin: 0;
+		width: 100%;
+	}
+
+	.pilot-wrapper img.portrait {
+		width: 110px;
+		height: 110px;
+	}
+
+	.pilot-wrapper .pilot-code {
+		width: auto;
+		max-width: 100%;
+	}
+
+	.pilot-wrapper .bonds-column {
+		flex-direction: column;
+		gap: 1em;
+	}
+
+	/* --- Pilot identity card (PilotsView grid item) --- */
+	.grid-item div.pilot,
+	.grid-item.portrait .pilot,
+	.pilot-modal div.pilot,
+	.pilot-modal.portrait .pilot,
+	.mech-modal div.mech,
+	.event-modal div.event,
+	.event-modal div.event div.markdown,
+	.pilot-modal div.pilot div.markdown {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+		margin-left: 0 !important;
+		box-sizing: border-box;
+	}
+
+	/* Modal markdown blocks: parent collapses to auto height in
+	   mobile, so `height: 100%` from base.css resolves to nothing
+	   and overflow can't scroll. Cap with viewport-relative max-height. */
+	.mech-modal div.mech div.markdown,
+	.mech-notes.markdown,
+	.pilot-modal div.pilot div.markdown,
+	.event-modal div.event div.markdown {
+		height: auto !important;
+		max-height: 60vh;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.pilot-identity .header {
+		font-size: 20px;
+		padding: 0.5em;
+		flex-wrap: wrap;
+	}
+
+	.pilot-identity .header .col img {
+		width: 48px;
+		height: 48px;
+		float: none;
+	}
+
+	.pilot-identity .body {
+		font-size: 13px;
+	}
+
+	.pilot-identity .flex-container-cols {
+		flex-direction: column;
+	}
+
+	.pilot-identity .col.col-primary,
+	.pilot-identity .col.col-share {
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+
+	.pilot-identity .pilot-image-container,
+	.pilot-identity .pilot-image-border {
+		width: 160px;
+		height: 160px;
+		margin: 0 auto 1em auto;
+	}
+
+	.pilot-identity .biometrics-container {
+		flex-direction: column;
+		gap: 0.5em;
+	}
+
+	/* --- Modal wide cards --- */
+	.event-modal div.event div.markdown {
+		padding: 0 0.5em;
+	}
+
+	/* Stack modal siblings (main + portrait) vertically */
+	.o-modal > div:nth-child(2) {
+		flex-direction: column;
+		gap: 2em;
+	}
+
+	/* --- Reserve / Clock containers full width --- */
+	.clocks-container {
+		flex-direction: column;
+	}
+
+	.story .clock,
+	.pilot .clock {
+		width: 100%;
+	}
+
+	.clock-body {
+		flex-direction: column;
+		gap: 0.5em;
+	}
+
+	/* --- Burdens grid: smaller --- */
+	.burdens .burden {
+		width: calc(100% / 5.75);
+	}
+
+	/* --- Markdown inside modals --- */
+	div.markdown {
+		padding-left: 0.75em;
+		padding-right: 0.75em;
+		font-size: 15px;
+	}
+
+	#events .markdown,
+	.glossary-container .markdown {
+		height: auto;
+		max-height: 70vh;
+	}
+}
+
+/* ============================================
+   SMALL MOBILE (max 480px)
+   Tighten further for narrow phones
+   ============================================ */
+@media (max-width: 480px) {
+	.title #title-header,
+	.title #title-subheader {
+		font-size: 18px;
+	}
+
+	.title #subtitle-header,
+	.title #subtitle-subheader {
+		font-size: 13px;
+	}
+
+	.location-row .subtitle {
+		font-size: 12px;
+	}
+
+	section .section-header h1 {
+		font-size: 17px;
+	}
+
+	.pilot-identity .pilot-image-container,
+	.pilot-identity .pilot-image-border {
+		width: 140px;
+		height: 140px;
+	}
+}
