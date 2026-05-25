@@ -80,32 +80,51 @@ export default {
 			faviconEl.setAttribute('href', favicon);
 			headEl.appendChild(faviconEl);
 		},
+		parseFrontmatter(raw) {
+			// Minimal YAML-frontmatter parser. Accepts:
+			//   ---
+			//   key: value
+			//   ---
+			//   markdown body...
+			// Values are trimmed; surrounding quotes are stripped. No nested objects.
+			const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+			if (!match) return { data: {}, content: raw };
+			const data = {};
+			match[1].split(/\r?\n/).forEach(line => {
+				const idx = line.indexOf(":");
+				if (idx === -1) return;
+				const key = line.slice(0, idx).trim();
+				const value = line.slice(idx + 1).trim().replace(/^["']|["']$/g, "");
+				if (key) data[key] = value;
+			});
+			return { data, content: match[2] };
+		},
 		async importMissions(files) {
 			let filePromises = Object.keys(files).map(path => files[path]());
 			let fileContents = await Promise.all(filePromises);
-			fileContents.forEach(content => {
-				let mission = {};
-				mission["slug"] = content.split("\n")[0];
-				mission["name"] = content.split("\n")[1];
-				mission["status"] = content.split("\n")[2];
-				mission["content"] = content.split("\n").splice(3).join("\n");
-				this.missions = [...this.missions, mission];
+			fileContents.forEach(raw => {
+				const { data, content } = this.parseFrontmatter(raw);
+				this.missions = [...this.missions, {
+					slug: data.slug || "",
+					name: data.name || "",
+					status: data.status || "",
+					content,
+				}];
 			});
-			this.missions = this.missions.sort(function (a, b) {
-				return b["slug"] - a["slug"];
-			})
+			this.missions = this.missions.sort((a, b) => b.slug - a.slug);
 		},
 		async importEvents(files) {
 			let filePromises = Object.keys(files).map(path => files[path]());
 			let fileContents = await Promise.all(filePromises);
-			fileContents.forEach(content => {
-				let event = {};
-				event["title"] = content.split("\n")[0];
-				event["location"] = content.split("\n")[1];
-				event["time"] = content.split("\n")[2];
-				event["thumbnail"] = content.split("\n")[3];
-				event["content"] = content.split("\n").splice(4).join("\n");
-				this.events = [...this.events, event];
+			fileContents.forEach(raw => {
+				const { data, content } = this.parseFrontmatter(raw);
+				this.events = [...this.events, {
+					title: data.title || "",
+					location: data.location || "",
+					time: data.time || "",
+					thumbnail: data.thumbnail || "",
+					content,
+				}];
 			});
 			this.events = this.events.reverse();
 		},
