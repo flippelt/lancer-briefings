@@ -1,0 +1,439 @@
+[
+  {
+    "id": "igfa1_mw_exo_the_grabber",
+    "name": "The Grabber",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Heavy",
+    "type": "Melee",
+    "range": [{
+      "type": "Threat",
+      "val": 2
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "2d6"
+    }],
+    "effect": "",
+    "on_hit": "you and your target each roll a contested Hull check. If you win the contested roll, your target is knocked Prone.",
+    "description": "A standard piece of equipment found on mining and salvage rigs throughout the system; its official product name is the IPS-N Mechanized Chassis Remote Handling Tool, but that’s boring as hell, so most folks call it “the Grabber.” Little work is needed to make it grab mechs as effectively as space debris, although such modification does void the warranty.",
+    "tags": [{
+      "id": "tg_exotic"
+    }]
+  },
+  {
+    "id": "igfa1_mw_exo_hyperkinetic_gauntlet",
+    "name": "Hyperkinetic Gauntlet",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Main",
+    "type": "Melee",
+    "effect":"This weapon can be used while unloaded, using a different profile.",
+    "profiles": [
+      {
+        "name": "Loaded",
+        "damage": [
+          {
+            "type": "Explosive",
+            "val": "1d6+4"
+          }
+        ],
+        "range": [
+          {
+            "type": "Threat",
+            "val": 1
+          }
+        ],
+        "tags": [
+          {
+            "id": "tg_loading"
+          },
+          {
+            "id": "tg_knockback",
+            "val": 1
+          }
+        ]
+      },
+      {
+        "name": "Unloaded",
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": "1d3+1"
+          }
+        ],
+        "range": [
+          {
+            "type": "Threat",
+            "val": 1
+          }
+        ],
+        "on_crit": "If this weapon is unloaded, reload it."
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_exotic"
+      }
+    ],
+    "description": "Inspired by the legend of Xiong Xiaoli, Hell’s Gate militia pilot Iska “Limbo” Volkov cobbled together a miniaturized approximation of the DD-288. While it didn’t quite live up to the mythic “Horse-Killing Palm,” it also places much less stress on a mech’s structure and doesn’t require reactor modifications.<br>Iska went on to achieve the highest confirmed kill count of any pilot in the Gate’s militia, but eventually retired to help her wife coach the station’s gravball team, stating that mech combat had grown “too peaceful” for her."
+  },
+  {
+    "id": "igfa1_mw_exo_leech_hunter_blade",
+    "name": "Leech Hunter's Blade",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Main",
+    "type": "Melee",
+    "on_crit": "If this weapon is not revved up, it becomes revved up before damage is rolled.",
+    "profiles": [
+      {
+        "name": "Unrevved",
+        "damage": [
+          {
+            "type": "Kinetic",
+            "val": "1d6+1"
+          }
+        ],
+        "range": [
+          {
+            "type": "Threat",
+            "val": 1
+          }
+        ],
+        "on_crit": "If this weapon is not revved up, it becomes revved up before damage is rolled.",
+        "effect": "You can rev up this weapon as a quick action.",
+        "actions": [
+          {
+            "name": "Rev Up!",
+            "activation": "Quick",
+            "detail": "Rev up the Leech Hunter's Blade, Slowing your mech and allowing use of its \"Revved Up!!!\" profile."
+          }
+        ],
+        "tags": [
+          {
+            "id": "tg_accurate"
+          }
+        ]
+      },
+      {
+        "name": "Revved Up!!!",
+        "damage": [
+          {
+            "type": "Burn",
+            "val": "1d3+4"
+          }
+        ],
+        "range": [
+          {
+            "type": "Threat",
+            "val": 1
+          }
+        ],
+        "actions": [
+          {
+            "name": "Rev Down...",
+            "activation": "Protocol",
+            "detail": "Rev down the Leech Hunter's Blade, ending the Slowed condition and allowing the Assault Cannon to be used with its \"Unrevved\" profile."
+          }
+        ],
+        "tags": [
+          {
+            "id": "tg_overkill"
+          },
+          {
+            "id": "tg_heat_self",
+            "val": 2
+          }
+        ]
+      }
+    ],
+    "tags": [
+      {
+        "id": "tg_unique"
+      },
+      {
+        "id": "tg_exotic"
+      }
+    ],
+    "description": "Sarissa \"Nova Cat\" Kairos developed this weapon more than eighty years ago during her one-woman campaign of vengeance against the Sun Drinkers pirate clan. A rotary rock-cutting saw modified to tolerate vented coldcore plasma, all it takes is the flick of a switch to turn this blade into a screaming, white-hot abomination that slices through armor like butter.<br>Stories differ as to what happened to Nova Cat and her original blade, but she left the schematics to her niece, who went on to produce several hundred copies and become one of the founding members of the Board of Icebreaker."
+  },
+  {
+    "id": "igfa1_mw_exo_golden_hand",
+    "name": "The Golden Hand",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Auxiliary",
+    "type": "CQB",
+    "range": [
+      {
+        "type": "Range",
+        "val": 5
+      },
+      {
+        "type": "Threat",
+        "val": 3
+      }
+    ],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "1d6"
+    }],
+    "on_crit": "After this attack, reload every weapon in this mount.",
+    "effect": "If you install the Golden Hand in the same mount as the Crimson Hand, they count as only one piece of Exotic Gear for installation limits.",
+    "description": "Marika was fast as lightning, and she had to be: she couldn’t aim worth a damn. Zhihao was quick to mock her wide shots, and it made her blush.<br>When your mech levels it, you smell whiskey, cigar smoke and rose perfume, hear the sound of dancing, and you want to laugh like the devil.",
+    "tags": [
+      {
+        "id": "tg_loading"
+      },
+      {
+        "id": "tg_reliable",
+        "val": 1
+      },
+      {
+        "id": "tg_unique"
+      },
+      {
+      "id": "tg_exotic"
+    }]
+  },
+  {
+    "id": "igfa1_mw_exo_catastrophe_beam",
+    "name": "Catastrophe Beam",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Superheavy",
+    "type": "Cannon",
+    "range": [
+      {
+        "type": "Line",
+        "val": 20
+      }
+    ],
+    "damage": [
+      {
+        "type": "Energy",
+        "val": "3d6"
+      },
+      {
+        "type": "Burn",
+        "val": 8
+      }
+    ],
+    "effect": "You must charge the Catastrophe Beam as a quick action before it can be fired. While the weapon is charged, you are Immobilized and cannot lose Heat by any means except overheating, but you benefit from soft cover. This weapon loses its charge when you fire it.",
+    "actions": [
+      {
+        "name": "Charge Catastrophe Beam",
+        "activation": "Quick",
+        "detail": "The Catastrophe Beam becomes charged, and can be fired. While the Catastrophe Beam is charged, you are Immobilized and cannot lose Heat by any means except overheating, but you benefit from soft cover."
+      }
+    ],
+    "on_attack": "This weapon automatically deals 30 AP Energy damage to all cover, terrain, and objects in its area. All characters within Burst 2 of you must make a Hull save or be pushed outside the area and knocked Prone.",
+    "description": "“I’m not going to bother writing any safety protocols in the documentation for this weapon. It’s not safe to fire under any circumstances, but I doubt that will stop you.”<br>- Dr. Genevieve Nyambose",
+    "tags": [
+      {
+      "id": "tg_heat_self",
+      "val": 8
+      },
+      {
+      "id": "tg_ordnance"
+      },
+      {
+      "id": "tg_exotic"
+    }]
+  },
+  {
+    "id": "igfa1_mw_exo_id_balistaria",
+    "name": "ID-390 “Balistaria” Marksman Rifle",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Heavy",
+    "type": "Rifle",
+    "range": [{
+      "type": "Range",
+      "val": 12
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "1d6+2"
+    }],
+    "effect": "Attacks with this weapon gain +1 Accuracy if you haven't moved since the end of your last turn.",
+    "description": "Impact Dynamics, noting the shortcomings of GMS anti-materiel rifles, produced a more compact, portable designated marksman weapon. While it couldn’t beat GMS’ offerings on raw stopping power or range, it matched them almost shot-for-shot on accuracy while allowing a level of battlefield maneuverability that simply wasn’t possible for larger, heavier weapons.<br>Unfortunately, before the weapon could enter full production, the company pivoted to agriculture and most of its ballistics projects were shuttered. The ID-390 remains popular among professional mercenaries, however, with some outfits travelling all the way to Calliope just to acquire a licensed printcode. ",
+    "tags": [
+    {
+      "id": "tg_ap"
+    },
+    {
+      "id": "tg_exotic"
+    }]
+  },
+  {
+    "id": "igfa1_mw_exo_id_obelisk",
+    "name": "ID-440 “Obelisk” Kinetic Repeater",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Heavy",
+    "type": "Cannon",
+    "range": [{
+      "type": "Range",
+      "val": 5
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "2d6"
+    }],
+    "effect": "",
+    "on_hit": "Make a secondary attack against all characters in a Cone 3 area directly behind the target. These attacks lose AP, can’t deal bonus damage and don’t trigger further secondary attacks. This effect triggers automatically if the attack is made against a piece of hard cover.",
+    "description": "Intended as an answer to the GMS heavy machine gun, the Obelisk failed to wow the market. Its proprietary Overpenetrator rounds are failure-prone and incompatible with other firearms, its recoil is considered unmanageable even by the standards of its weight class, and its range leaves much to be desired. Nevertheless, Impact Dynamics made thousands of them for a contact that never got fulfilled.",
+    "tags": [
+    {
+      "id": "tg_ap"
+    },
+    {
+      "id": "tg_inaccurate"
+    },
+    {
+      "id": "tg_exotic"
+    }
+   ]
+  },
+  {
+    "id": "igfa1_mw_exo_id_hardcastle",
+    "name": "ID-730 “Hardcastle” Automatic Shotgun",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Main",
+    "type": "CQB",
+    "range": [{
+      "type": "Range",
+      "val": 3
+    },
+    {
+      "type": "Threat",
+      "val": 3
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "2d6"
+    }],
+    "effect": "If Overkill triggers, this weapon doesn’t need to be reloaded.",
+    "description": "The ID-730 was undergoing its first design revision when Impact Dynamics abandoned weapons development. Results from the initial release were promising, but its trigger had an unfortunate tendency to “run away,” emptying entire magazines or melting the barrel.",
+    "tags": [
+    {
+      "id": "tg_loading"
+    },
+    {
+      "id": "tg_overkill"
+    },
+    {
+      "id": "tg_unique"
+    },
+    {
+      "id": "tg_exotic"
+    }
+   ]
+  },
+  {
+    "id": "igfa1_mw_exo_id_sermon",
+    "name": "ID-820 “Sermon” Compact SMG",
+    "source":"EXOTIC",
+    "license":"",
+    "license_level":0,
+    "mount": "Auxiliary",
+    "type": "CQB",
+    "range": [{
+      "type": "Range",
+      "val": 5
+    },
+    {
+      "type": "Threat",
+      "val": 3
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "1d3+1"
+    }],
+    "effect": "Any number of ID-820 “Sermon” Compact SMGs installed on the same mech count as only one piece of Exotic Gear for installation limits.",
+    "description": "Impact Dynamics designed he ID-820 with one goal: put as much lead downrange, in as little time, with as little recoil, in as tight a frame as possible. It hit all of these targets, and was one of the company’s flagship products before it switched to agriculture. It’s proven so popular that Impact Dynamics still revises and updates it on occasion.",
+    "tags": [
+    {
+      "id": "tg_reliable",
+      "val": 1
+    },
+    {
+      "id": "tg_exotic"
+    }
+   ]
+  },
+  {
+    "id": "igfa1_mw_exo_starquake",
+    "name": "“Starquake” Quad-Barrel Shotgun",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Heavy",
+    "type": "CQB",
+    "range": [{
+      "type": "Range",
+      "val": 3
+    },
+    {
+      "type": "Threat",
+      "val": 3
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "2d6+3"
+    }],
+    "on_attack": "If your mech is Size 1 or smaller, you are knocked 1 space back from your target.",
+    "effect": "",
+    "description": "This appears to be a Conical Kinetic Projector from a subline starship, clumsily patched into the firing mechanism of a mech-scale shotgun. Little thought seems to have been given to how it would handle, meaning that low-tonnage mechs can actually be lifted slightly off the ground by the sheer force of its recoil.",
+    "tags": [
+    {
+      "id": "tg_reliable",
+      "val": 3
+    },
+    {
+      "id": "tg_inaccurate"
+    },
+    {
+      "id": "tg_exotic"
+    }
+   ]
+  },
+  {
+    "id": "igfa1_mw_tripled_point",
+    "name": "Tripled Point",
+    "source":"EXOTIC",
+    "license_id": "",
+    "license_level":0,
+    "mount": "Main",
+    "type": "Nexus",
+    "range": [{
+      "type": "Range",
+      "val": 10
+    }],
+    "damage": [{
+      "type": "Kinetic",
+      "val": "1d3+1"
+    }],
+    "effect": "This weapon makes three attacks at once, each of which must be against a different target. Attack and damage rolls are made normally, but only one of these attacks actually happens; you choose which.<br>The other two attacks don’t happen; damage isn’t dealt, Lock On isn’t consumed, effects are not triggered and the attack does not count as multi-target. Reactions to each attack must be declared before you decide which one is real, but only trigger if they apply to the real attack.<br>For the purposes of talents, systems and core bonuses that apply only once a round or activate on the first attack of a round, all three attacks qualify.",
+    "description": "Though the light inside has departed, it still whispers to you of all the things that could have been, and might yet be.",
+    "sp": 1,
+    "tags": [{
+      "id": "tg_smart"
+    }, {
+      "id": "tg_unique"
+    }, {
+      "id": "tg_exotic"
+    }]
+  }
+]
