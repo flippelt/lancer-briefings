@@ -133,6 +133,50 @@ All breakpoints live in `/src/assets/styles/_responsive.css` as the single sourc
 
 The `<audio>` element in `App.vue` is no longer set to autoplay — most browsers (Chrome, Firefox, Safari) block autoplay with sound until the page receives a user gesture, so the original `<audio autoplay>` was silently rejected for first-time visitors. Playback now triggers on the first `pointerdown` or `keydown` event after load.
 
+## Admin / CMS
+
+The site ships with a [Decap CMS](https://decapcms.org/) editor at `/admin/`. After logging in, the editor lets you create and edit missions, events, clocks, reserves, and the global config from a UI — no need to touch the repo directly. Edits commit straight to `main` via Netlify's git-gateway, the build pipeline runs, and the change is live in ~30s.
+
+### What's editable
+
+- **Missões** — markdown body + slug / name / status frontmatter (writes to `src/assets/missions/*.md`)
+- **Eventos** — markdown body + title / location / time / thumbnail frontmatter (writes to `src/assets/events/*.md`)
+- **Clocks** — list of `{ type, name, description, value, max, color, result }` (writes to `src/assets/clocks/clocks.json`)
+- **Reserves** — list of `{ type, name, description, label, cost, notes, callsign }` (writes to `src/assets/reserves/reserves.json`)
+- **Configurações Gerais** — `src/assets/info/general-config.json` (header text, ano, planeta, etc.)
+
+**Not editable in the CMS** (intentional):
+- **Pilots** — CompCon export shape is too specific to model in Decap. Drop the `.json` from CompCon directly into `src/assets/pilots/`.
+- **LCPs** — paid third-party content; managed manually under `src/assets/LCPs/`.
+
+### Enabling Netlify Identity + git-gateway
+
+The CMS is wired to Netlify Identity. Before anyone can log in, you need to enable both services on the Netlify dashboard:
+
+1. Open your site on [app.netlify.com](https://app.netlify.com) → **Site settings → Identity** → click **Enable Identity**.
+2. Under **Registration preferences**, set the mode to **Invite only** so random people who land on the site can't sign themselves up.
+3. Scroll to **Services → Git Gateway** and click **Enable Git Gateway**. This grants Netlify permission to commit on behalf of authenticated users via a server-side token.
+4. (Optional, recommended for OAuth) Under **External providers**, enable Google or GitHub so invited users have a one-click login instead of email + password.
+
+### Restricting access to specific people
+
+`public/admin/config.yml` declares `accept_roles: [admin]`. That means even a successfully-authenticated Identity user will be rejected by Decap unless they carry the `admin` role.
+
+To invite someone:
+
+1. Netlify dashboard → **Identity → Invite users** → paste their email and send.
+2. After they accept and create their password, the user shows up under **Identity → Users**.
+3. Click the user → **Edit settings** → in the **Roles** field add `admin` → save.
+4. They can now access `/admin/` and the CMS will let them save edits.
+
+To revoke access: clear the `admin` role from the user, or delete the user entirely. They'll still be able to log in with Identity, but Decap will reject them.
+
+### Local development of the admin
+
+The Decap UI loads from CDN inside `public/admin/index.html` and reads `public/admin/config.yml`. Both files ship as-is to `dist/` — Vite serves the `public/` folder verbatim, so `npm run dev` exposes the admin at `http://localhost:5173/admin/` immediately.
+
+To actually log in and exercise the git-gateway flow you need to be hitting the deployed Netlify URL (the local dev server isn't connected to Identity / git-gateway). For UI-only tweaks to the schema or fields, dev-server testing is enough — the editor renders, just rejects login.
+
 ## Progressive Web App (offline support)
 
 The site is configured as an installable PWA via `vite-plugin-pwa`. After the first visit the service worker pre-caches every built asset (HTML, JS, CSS, fonts, icons, the planet `.webm`, the startup `.ogg`, and so on) plus runtime-caches Google Fonts, the three.js CDN script, and external event-thumbnail images. The result is a briefing dashboard that keeps working in full at the table even if the venue WiFi drops mid-session.

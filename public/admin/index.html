@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Admin — UN | Central de Controle</title>
+	<link rel="icon" type="image/svg+xml" href="/icons/pwa-icon.svg" />
+</head>
+<body>
+	<!-- Netlify Identity widget — handles login UI and exchanges credentials
+	     for the JWT that git-gateway uses to commit on the user's behalf. -->
+	<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+	<!-- Decap CMS — reads /admin/config.yml, mounts the editor UI, talks
+	     to git-gateway with the Identity JWT. -->
+	<script src="https://unpkg.com/decap-cms@^3.8.0/dist/decap-cms.js"></script>
+</body>
+</html>

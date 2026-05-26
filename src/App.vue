@@ -254,14 +254,19 @@ export default {
 			let filePromises = Object.keys(files).map(path => files[path]());
 			let fileContents = await Promise.all(filePromises);
 			fileContents.forEach(content => {
-				this.clocks = JSON.parse(JSON.stringify(content)).default;
+				const parsed = JSON.parse(JSON.stringify(content)).default;
+				// Decap CMS writes the file as `{ "clocks": [...] }` because
+				// root-level arrays can't be modeled by its `list` widget.
+				// Legacy files were a raw array — accept both shapes.
+				this.clocks = Array.isArray(parsed) ? parsed : (parsed?.clocks ?? []);
 			});
 		},
 		async importReserves(files) {
 			let filePromises = Object.keys(files).map(path => files[path]());
 			let fileContents = await Promise.all(filePromises);
 			fileContents.forEach(content => {
-				this.reserves = JSON.parse(JSON.stringify(content)).default;
+				const parsed = JSON.parse(JSON.stringify(content)).default;
+				this.reserves = Array.isArray(parsed) ? parsed : (parsed?.reserves ?? []);
 			});
 		},
 		async importPilots(files) {
