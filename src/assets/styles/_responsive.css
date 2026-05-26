@@ -929,4 +929,40 @@ body > canvas {
 		width: 140px;
 		height: 140px;
 	}
+
+	/* On Galaxy S25-class phones (~360-400px viewports) the pilot
+	   card was sitting a few pixels right of center, hiding its right
+	   border behind the viewport edge. Two compounding causes:
+
+	   1. The IDENT record line "Hunt.Caleb:<UUID>//NDL-C-BLIND-REACH"
+	      is one ~67-character token in monospace with no spaces. CSS
+	      defaults to `word-break: normal`, which doesn't break inside
+	      tokens, so the line overflowed its container horizontally
+	      and pushed the entire card content past the viewport.
+	   2. `.grid-item { flex: 45% }` in PilotsView's scoped CSS leaves
+	      the card flex-growable from a 45% basis. With one item it
+	      grows to fill, but combined with #1 the grow target landed
+	      slightly wider than the available width.
+
+	   Forcing `flex: 0 0 100%` pins the card to exactly the
+	   container's inner width, and allowing the long IDENT token to
+	   break anywhere prevents the overflow that triggered the
+	   shift. The .pilot-list-container also drops to 0.5em side
+	   padding to give the card a little more breathing room on the
+	   narrowest devices. */
+	.pilot-list-container {
+		padding: 0.5em !important;
+		justify-content: center;
+	}
+	.grid-item.pilot-identity {
+		flex: 0 0 100% !important;
+		max-width: 100% !important;
+		min-width: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	.pilot-identity .body {
+		overflow-wrap: anywhere;
+		word-break: break-word;
+	}
 }
