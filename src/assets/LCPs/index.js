@@ -8,6 +8,7 @@ import sotwData from "./sotw-data-1.0.2";
 import owsData from "./ows-data-1.0.0";
 import dustgraveData from "./dustgrave-data-1.4.0";
 import sirenData from "./siren-song-data";
+import igfa1Data from "./igfa1-data-0.2.2";
 
 // Order matters: lancer's canonical data first so its IDs win on any conflict.
 const sources = [
@@ -21,6 +22,7 @@ const sources = [
 	owsData,
 	dustgraveData,
 	sirenData,
+	igfa1Data,
 ];
 
 const collect = (key) =>

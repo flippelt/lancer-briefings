@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ms_exo_bronco_hook",
+    "name": "BRONCO HOOK",
+    "sp": 2,
+    "tags": [{
+      "id": "tg_unique"
+    }, {
+      "id": "tg_exotic"
+    }],
+    "source": "EXOTIC",
+    "actions": [{
+        "activation": "Quick",
+        "detail": "Choose a character within Range 5 and line of sight. They make an AGILITY save. If they fail, you embed a hooked cable in the target. You and the target may not move more than 5 spaces away from each other. Either character can tow the other, obeying the normal rules for lifting and dragging, and becoming SLOWED while doing so.<br>Any character can remove the cables on a hit with a melee attack or IMPROVISED ATTACK against EVASION 15. The hooked character can also rip the hook out with a quick action, but they take 3 AP kinetic damage and become SHREDDED until the end of their next turn if they do so."
+      }],
+    "description": "An old favorite of both pirates and the people who fight them, this is a wrist-mounted magnetic accelerator, originally designed to make tether points on asteroids by driving mech-scale pitons into them. Rule of thumb is if it punches through a meter of asteroid rock, it punches through ten centimeters of mech."
+  },
+  {
+    "id": "ms_exo_rebound_pulse_mineral_scanner",
+    "name": "REBOUND PULSE MINERAL SCANNER",
+    "type": "Tech",
+    "sp": 1,
+    "tags": [{
+      "id": "tg_unique"
+    }, {
+      "id": "tg_exotic"
+    }],
+    "source": "EXOTIC",
+    "actions": [{
+        "name": "Rebound Pulse",
+        "activation": "Quick Tech",
+        "detail": "1/mission, you may activate this system to Scan every character in a Cone 7 area, then apply Lock On to the character with the most current HP. All hostile characters in the area also lose Hidden."
+      }],
+    "description": "A simple piece of tech found on almost every mining ship, modified to provide an effective battlefield reconnaissance tool. Its minimum safe stand-off distance is several hundred kilometers; anything less, and the ping-back is loud enough to blow out the antenna."
+  },
+  {
+    "id": "ms_exo_cardcounter",
+    "name": "CARDCOUNT_V7.7.7_FINAL.OMEX",
+    "sp": 2,
+    "tags": [{
+      "id": "tg_unique"
+    },
+    {
+      "id": "tg_heat_self",
+      "val": 2
+    }, 
+    {
+      "id": "tg_exotic"
+    }],
+    "source": "EXOTIC",
+    "actions": [{
+        "name": "Count Cards",
+        "activation": "Protocol",
+        "detail": "For the rest of the turn, this system becomes charged and you can’t take full actions until the start of your next turn.<br>If, during a quick action, you make an attack roll that misses or force a save that an enemy passes, expend the system’s charge. That quick action didn’t really happen; your probability calculation returned an unfavorable result. Limited charges aren’t expended, loading weapons aren’t unloaded, reactions aren’t triggered, and so on. You must then choose a different quick action, and perform it instead.<br>If you don’t use it, this system loses its charge at the end of your turn, as the calculation’s initial conditions no longer reflect reality."
+      }],
+    "description": "Card-counting devices and programs are banned everywhere on the Icebreaker; it’s one of the few things the Board can agree on. What makes this specific distro special (and even more illegal) is that, somehow, it can also predict slot machines, roulette wheels and mech fights. Programmers hired to examine it reported a tangle of neural-network-written paracode that seems to call variables antichronally."
+  }
+]

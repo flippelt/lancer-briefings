@@ -1,0 +1,193 @@
+[
+    {
+        "id": "igf-bond-influencer",
+        "name": "The Influencer",
+        "major_ideals": [
+            "I addressed challenges with charisma, personal magnetism or my connections.",
+            "I expressed my heritage, background or beliefs through my actions.",
+            "I struggled with issues from my burdens or background."
+        ],
+        "minor_ideals": [
+            "I made the whole thing about me.",
+            "I made a ridiculous boast and lived up to it.",
+            "I put a lot of new eyes on an important subject.",
+            "Someone else had the answer, and I knew how to get it from them."
+        ],
+        "questions": [
+            {
+                "question": "What gives you your powers?",
+                "options": [
+                    "An inimitable personal brand, cultivated over the year." ,
+                    "Daddy’s credit line.",
+                    "An unusually good sponsorship deal.",
+                    "The sale of your soul, figuratively or literally."
+                ]
+            },
+            {
+                "question": "What is most likely to harm your image?",
+                "options": [
+                    "Your controversial sociopolitical takes." ,
+                    "Your checkered family history.",
+                    "Your ill-conceived tattoo.",
+                    "Your past allegiances.",
+                    "Your rampant plagiarism.",
+                    "Your refusal to properly credit artists."
+                ]
+            }
+        ],
+        "powers": [
+            {
+                "name": "All Eyes on Me",
+                "description": "You can take 2 STRESS to immediately make yourself the center of attention. For a moment, everyone and everything looks at you and only you. People fail to register the presence of other people or things, and even security footage zooms in on you too tightly to keep track of anything else. After this moment ends, you’ll have to work if you want to hold their attention, and you can't use this power twice in the same scene."
+            },
+            {
+                "name": "Always an Audience",
+                "frequency": "1/session",
+                "description": "When you’re threatened by people who think they can do what they want because they outnumber you, or because nobody’s watching, you can reveal how you’re not as alone as they think. Either they back off <i>now</i>, or they choose two:<ul><li>You have some backup after all.</li><li>Everyone will know who they are and what they did.</li><li>That's not the only mistake they made.</li></ul>"
+            },
+            {
+                "name": "Carpe Diem // Carpe Noctem",
+                "frequency": "2/session",
+                "description": "<b>Carpe Diem</b>: When you do something totally reckless, ill-advised and dangerous just to look cool or impress people, you take 2 STRESS and get increased effect. This power then becomes <b>Carpe Noctem</b>.<br><b>Carpe Noctem</b>: When you show sudden wisdom, restraint or foresight that nobody expected from you, you take 2 STRESS and get +2 ACCURACY. This power then becomes <b>Carpe Diem</b>."
+            },
+            {
+                "name": "Everyone's a Fan",
+                "frequency": "2/session",
+                "description": "Upon first meeting a new person, if it seems plausible, you may declare that they’re a fan of yours. Roll a <b>d20</b>.<ul><li>On a <b>20</b>, oh my god, it’s really you! They’ll do almost anything for you, within reason.</li><li>On a <b>10-19</b>, they’re a fan, and they’re delighted to meet you. They’ll help you if it won’t cause trouble.</li><li>On a <b>2-9</b>, who?</li><li>On a <b>1</b>, oh, they’ve heard of you alright, and they fucking <i>loathe</i> you.</li></ul>"
+            },
+            {
+                "name": "Incomprehensible Memetic Subculture",
+                "description": "You can couch your spoken or written words in layers of reference and irony so obscure that, in practical terms, they are encrypted. Only the people for whom your message is intended can understand it; others perceive nonsense. This doesn’t automatically count as lying. It’s usually obvious that you’re doing this, but that doesn’t make deciphering it any easier."
+            },
+            {
+                "name": "On The List",
+                "description": "You can get into almost any meeting, private function or exclusive social gathering, simply through your own reputation or by namedropping a relevant person. This only gets you through the door; you will have to do the work of convincing those inside you belong there. For 2 STRESS, you can bring up to four other people along."
+            },
+            {
+                "name": "Oversharing",
+                "description": "You may clear 2 additional STRESS during downtime, but if you do, everyone knows exactly what you’ve been doing lately. What’s “opsec?”"
+            },
+            {
+                "name": "Plugged In",
+                "description": "If you don’t know it yourself, you know where to look for it or who to ask. As long as you have access to a major information network – the omninet, the Muse, a planet’s local internet – if you roll a 9< or lower on any check to research or find information, you may treat the result as a 10 instead. Accessing confidential, restricted or deeply obscure information this way is RISKY – you might still get it, but there’ll be consequences."
+            },
+            {
+                "name": "Reality Consensus",
+                "description": "You can manipulate the memory of crowds. In any gathering of more than six individuals, people tend to remember events occurring the way you recount them, so long as it doesn’t clash with obvious physical evidence. Gain +1 ACCURACY and increased effect on rolls where this is relevant."
+            },
+            {
+                "name": "Vindictive",
+                "frequency": "1/session",
+                "description": "When you Heal Burdens, you gain +1 ACCURACY on the check if you’re taking action to harm or inconvenience those you consider responsible for your suffering."
+            },
+            {
+                "name": "Boon of Exposure",
+                "prerequisite": "If you have two or more powers from this bond, you can choose a power from any other bond instead of one from this bond when you would gain a power. You can do this twice. If you have at least one veteran power, gain the Boon of Exposure.",
+                "description": "At the end of each session, if you think you did something really cool, name a person who’ll look better just for standing next to you. They get 1 XP.",
+                "veteran": true
+            },
+            {
+                "name": "Cancellation",
+                "prerequisite": "You may only gain this power If you’ve taken four powers from this bond, including the Veteran Power.",
+                "frequency": "1/session",
+                "description": "Choose an enemy. Accuse them of something truly awful. The searing gaze of public opinion falls upon them; they will be judged and found sorely wanting. For at least a scene, <i>nobody</i> will help them, and <i>everyone</i> will hate them. After that, if what you said is provably true, the stigma remains. If it’s likely but unproven, the stench of it taints them for a while afterward. If it’s clearly false, you’re next, <i>liar</i>.",
+                "master": true
+            }
+        ]
+    },
+    {
+        "id": "igf-bond-technician",
+        "name": "The Technician",
+        "major_ideals": [
+            "I addressed challenges with ingenuity, intuition or technical skill.",
+            "I expressed my heritage, background or beliefs through my actions.",
+            "I struggled with issues from my burdens or background."
+        ],
+        "minor_ideals": [
+            "I learnt a new and useful trick.",
+            "I made a skeptic appreciate my profession.",
+            "I trusted a gut feeling about what was wrong.",
+            "I kept things running smoothly, and nobody noticed."
+        ],
+        "questions": [
+            {
+                "question": "What gives you your powers?",
+                "options": [
+                    "A childhood spent crawling through vents and plugging air leaks." ,
+                    "The strict tutelage of a veteran in your field.",
+                    "A whole lot of trial and error.",
+                    "That strange, other voice that the comp/cons sometimes speak with."
+                ]
+            },
+            {
+                "question": "What was the thing you couldn’t fix?",
+                "options": [
+                    "Your family." ,
+                    "Your home.",
+                    "Your world.",
+                    "Your ship.",
+                    "Yourself."
+                ]
+            }
+        ],
+        "powers": [
+            {
+                "name": "Custom Tools",
+                "description": "Choose a specific field of work – for example, HVAC repair, reactor maintenance, contract negotiation, etc. Over the course of your career, you’ve assembled a personal toolbox, whether literal or metaphorical. Whenever you’re working in that field and you have access to your toolbox, you gain increased effect."
+            },
+            {
+                "name": "Fehlersinn",
+                "description": "You can look at something that’s broken and get a gut feeling of what went wrong. This doesn’t <i>necessarily</i> give you any information on how to fix it, but it might. You must be able to see and reach out to touch what’s broken, although the “seeing” and “reaching out” can be metaphorical."
+            },
+            {
+                "name": "Gordian Knot",
+                "frequency": "1/session",
+                "description": "When you or an ally you can see or hear fails a skill check, you may describe how you quickly improvise a simple, low-tech solution to the problem. The check succeeds instead, but you take 2 STRESS and choose one of the following:<ul><li>Your solution broke something else.</li><li>Your solution used up an important resource (time, supplies, scrap metal, patience, etc.)</li><li>Your solution attracted the wrong kind of attention.</li></ul>"
+            },
+            {
+                "name": "Improvised Equipment",
+                "description": "You’ve gotten used to working with whatever you have, no matter how insufficient and piecemeal it may be. You may choose to negate any amount of DIFFICULTY on a roll that comes from not having the proper tools, but whether or not your roll succeeds, choose one:<ul><li>The exact same problem is going to come back soon, and this time it’ll be worse.</li><li>Something personally important to you or someone else is broken, used up or gone.</li><li>You had to take real harm to make this work – physical, emotional, or psychological.</li></ul>"
+            },
+            {
+                "name": "Job Satisfaction",
+                "description": "When you mend something, anything – when you really, properly, truly fix it – you clear 1 STRESS."
+            },
+            {
+                "name": "Juice It",
+                "frequency": "1/session",
+                "description": "You know how to make something – almost always a piece of technology – operate significantly above its recommended output. For the rest of the scene, whatever you modify this way gives increased effect to any rolls that use it. At the end of the scene, it immediately and catastrophically breaks."
+            },
+            {
+                "name": "Percussive Maintenance",
+                "frequency": "2/session",
+                "description": "When you whack something inanimate to just make the godforsaken piece of shit <i>work</i>, choose one: it doesn’t help at all, but you clear 1 STRESS, or you take 2 STRESS and it awkwardly sputters back to life."
+            },
+            {
+                "name": "Proper Procedure",
+                "description": "Once you’ve done something a few times, you can do it by rote. If you’d roll a skill check for doing the exact same thing you’ve done several times before, you can choose to forgo the roll and treat the result as a 10-19. You can’t modify this result with ACCURACY or increased effect. If a task isn’t identical, just very similar, you still need to roll, but gain +1 ACCURACY."
+            },
+            {
+                "name": "Solidarity",
+                "description": "When you stand shoulder-to-shoulder with a crowd of people (at least ten) against a mutual threat, you gain +1 ACCURACY to all rolls and you ignore the first point of STRESS that you would receive in a scene. If it’s more than twenty, ignore the first two points of STRESS instead."
+            },
+            {
+                "name": "The Tower",
+                "frequency": "1/session",
+                "description": "A life of learning to fix things has also taught you how to take them apart. If you have comprehensive information about something – a machine, a system, an organization – you know exactly what will do the most damage to it, right now. Until the end of the scene, you gain increased effect on all efforts to put this knowledge into action."
+            },
+            {
+                "name": "Boon of the Wrench",
+                "prerequisite": "If you have two or more powers from this bond, you can choose a power from any other bond instead of one from this bond when you would gain a power. You can do this twice. If you have at least one veteran power, gain the Boon of the Wrench.",
+                "description": "At the end of each session, if you think a complicated problem was fixed, describe how the pieces came together. Give someone you think was instrumental in the solution 1 XP.",
+                "veteran": true
+            },
+            {
+                "name": "Vox Ad Machina",
+                "prerequisite": "You may only gain this power If you’ve taken four powers from this bond, including the Veteran Power.",
+                "frequency": "1/session",
+                "description": "Touch a non-sentient machine and tell it exactly what you want. If there’s even the slightest chance it could do what you ask, it does so, at precisely the moment you need it to. Then the GM chooses one of the following:<ul><li>The machine will never work again, ever.</li><li>The machine exacts a heavy price in return.</li><li>The machine is no longer non-sentient.</li></ul>",
+                "master": true
+            }
+        ]
+    }
+]
