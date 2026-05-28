@@ -1,0 +1,206 @@
+# Decap CMS configuration
+#
+# Backend: Netlify Identity + git-gateway. Edits are committed straight
+# to `main` via the gateway, so a successful save triggers the Netlify
+# rebuild and the change is live in ~30s.
+#
+# Access control: `accept_roles: [admin]` rejects logged-in Identity users
+# who don't carry the "admin" role. Combined with invite-only signup on
+# the Netlify side, only people you explicitly invite AND grant the role
+# can use the CMS.
+backend:
+  name: git-gateway
+  branch: main
+  accept_roles:
+    - admin
+  commit_messages:
+    create: "Create {{collection}} '{{slug}}'"
+    update: "Update {{collection}} '{{slug}}'"
+    delete: "Delete {{collection}} '{{slug}}'"
+    uploadMedia: "Upload {{path}}"
+    deleteMedia: "Delete {{path}}"
+
+# Saves the change directly to `main`. No PR review step — for personal /
+# small-team use this is what gives the "edit and see it live in 30s"
+# feel. Switch to `editorial_workflow` later if you want every edit to
+# open a PR first.
+publish_mode: simple
+
+# Public site URL (used by Decap for preview links and OAuth callbacks).
+site_url: https://contrafatores.netlify.app
+display_url: https://contrafatores.netlify.app
+
+# Media library — Decap drops any uploaded files (e.g. event thumbnails)
+# in public/uploads/ and rewrites references to /uploads/<file>.
+media_folder: public/uploads
+public_folder: /uploads
+
+# Decap UI in Portuguese (matches the rest of the app's UI strings).
+locale: pt
+
+collections:
+  # ----------------------------------------------------------------------
+  # Missions — one Markdown file per mission in src/assets/missions/.
+  # The frontmatter mirrors the schema App.vue::parseFrontmatter expects.
+  # The body becomes the mission's main markdown content rendered in the
+  # "Objetivo Atual" panel.
+  # ----------------------------------------------------------------------
+  - name: missions
+    label: Missões
+    label_singular: Missão
+    folder: src/assets/missions
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    identifier_field: slug
+    summary: "{{slug}} — {{name}} ({{status}})"
+    fields:
+      - label: Slug
+        name: slug
+        widget: string
+        hint: "Identificador único, vira o nome do arquivo. Ex: 001, 004-A"
+      - label: Nome
+        name: name
+        widget: string
+      - label: Status
+        name: status
+        widget: select
+        default: start
+        options:
+          - { label: "Em andamento", value: start }
+          - { label: "Sucesso", value: success }
+          - { label: "Sucesso parcial", value: partial-success }
+          - { label: "Falha", value: failure }
+      - label: Conteúdo
+        name: body
+        widget: markdown
+
+  # ----------------------------------------------------------------------
+  # Events — same shape pattern (markdown + frontmatter), different fields.
+  # The thumbnail accepts either a full URL (imgur, etc.) or a path to an
+  # image uploaded through Decap's media library (lands in public/uploads/).
+  # ----------------------------------------------------------------------
+  - name: events
+    label: Eventos
+    label_singular: Evento
+    folder: src/assets/events
+    extension: md
+    format: frontmatter
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{location}} ({{time}})"
+    fields:
+      - { label: Título, name: title, widget: string }
+      - { label: Local, name: location, widget: string }
+      - { label: Tempo, name: time, widget: string, hint: "Ex: 5014u" }
+      - label: Thumbnail
+        name: thumbnail
+        widget: string
+        hint: "URL completa (https://i.imgur.com/...) ou caminho de uma imagem enviada pela aba Media"
+      - { label: Conteúdo, name: body, widget: markdown }
+
+  # ----------------------------------------------------------------------
+  # Single-file collections — clocks.json, reserves.json, general-config.json.
+  # Grouped under a "Dados gerais" collection in the Decap sidebar.
+  # ----------------------------------------------------------------------
+  - name: data
+    label: Dados gerais
+    files:
+      # Clocks — array of segmented-progress trackers shown on the Status
+      # view. Wrapped in { clocks: [...] } so Decap's "list" widget has a
+      # named field to target (root-level arrays aren't a supported shape).
+      - name: clocks
+        label: Clocks
+        file: src/assets/clocks/clocks.json
+        format: json
+        fields:
+          - label: Clocks
+            name: clocks
+            widget: list
+            summary: "{{fields.name}} — {{fields.value}}/{{fields.max}}"
+            fields:
+              - { label: Tipo, name: type, widget: string, hint: "Ex: 'Mission Clock'" }
+              - { label: Nome, name: name, widget: string }
+              - { label: Descrição, name: description, widget: text }
+              - label: Valor atual
+                name: value
+                widget: number
+                value_type: int
+                min: 0
+              - label: Máximo (segmentos)
+                name: max
+                widget: number
+                value_type: int
+                min: 1
+                default: 6
+              - label: Cor (hex)
+                name: color
+                widget: string
+                default: "#3CB043"
+                pattern: ["^#([A-Fa-f0-9]{6})$", "Use um hex com 6 dígitos (#RRGGBB)"]
+              - label: Resultado
+                name: result
+                widget: string
+                required: false
+                hint: "Texto curto exibido quando o clock completa"
+
+      # Reserves — supplies / favors / clocks-on-the-back-of-clocks pattern.
+      - name: reserves
+        label: Reserves
+        file: src/assets/reserves/reserves.json
+        format: json
+        fields:
+          - label: Reserves
+            name: reserves
+            widget: list
+            summary: "{{fields.name}} ({{fields.type}})"
+            fields:
+              - { label: Tipo, name: type, widget: string, hint: "Ex: 'Gear', 'Resources', 'Tactical'" }
+              - { label: Nome, name: name, widget: string }
+              - { label: Descrição, name: description, widget: text }
+              - { label: Label, name: label, widget: string, required: false }
+              - { label: Custo, name: cost, widget: string, required: false }
+              - { label: Notas, name: notes, widget: text, required: false }
+              - label: Callsign do piloto dono
+                name: callsign
+                widget: string
+                required: false
+                hint: "Vazio se for reserva geral (não atrelada a um piloto)"
+
+      # general-config.json — the global app config. pilotSpecialInfo is
+      # an arbitrary-shape map keyed by callsign, hard to model in Decap.
+      # `widget: hidden` keeps the existing value untouched whenever this
+      # file is saved through the CMS, so editing the header text won't
+      # blow away the pilot extras.
+      - name: general-config
+        label: Configurações Gerais
+        file: src/assets/info/general-config.json
+        format: json
+        fields:
+          - label: Slug da missão inicial
+            name: initialSlug
+            widget: string
+            hint: "Slug da missão que aparece selecionada ao abrir o site"
+          - { label: Vídeo do planeta, name: planetPath, widget: string, hint: "Caminho da .webm. Ex: /public_planet.webm" }
+          - { label: Animar entrada, name: animate, widget: boolean, default: true }
+          - { label: Prefixo do título da aba do navegador, name: defaultTitle, widget: string, hint: "Ex: 'UN |'" }
+          - { label: Favicon, name: icon, widget: string, hint: "Caminho da imagem do favicon" }
+          - label: Cabeçalho
+            name: header
+            widget: object
+            fields:
+              - { label: Planeta, name: planet, widget: string }
+              - { label: Ano, name: year, widget: string, hint: "Ex: 5014u" }
+              - { label: Sistema, name: system, widget: string }
+              - { label: Gate, name: gate, widget: string }
+              - { label: Ring, name: ring, widget: string }
+              - { label: Título do cabeçalho, name: headerTitle, widget: string }
+              - { label: Subtítulo do cabeçalho, name: headerSubtitle, widget: string, required: false }
+              - { label: Título do sub-cabeçalho, name: subheaderTitle, widget: string }
+              - { label: Subtítulo do sub-cabeçalho, name: subheaderSubtitle, widget: string, required: false }
+          - label: Pilot Special Info
+            name: pilotSpecialInfo
+            widget: hidden
+            hint: "Mapa avançado por callsign — edite diretamente no repo se precisar mudar"

@@ -23,5 +23,23 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 		<script type="module" src="/src/assets/scripts/vanta.globe.min.js"></script>
 		<script type="module" src="/src/main.js"></script>
+
+		<!-- Netlify Identity widget: only enables the "Login" prompt that
+		     Decap CMS needs when the user lands on /admin/ from a fresh
+		     auth invite email. The bootstrap below redirects newly logged-
+		     in users to /admin/ so they don't end up stuck on the briefing
+		     page after clicking the email confirmation link. -->
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+		<script>
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", (user) => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
