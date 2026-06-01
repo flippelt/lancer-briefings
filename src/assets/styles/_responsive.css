@@ -688,6 +688,13 @@ body > canvas {
 		gap: 10px;
 	}
 
+	/* The EVENT LOG header lives inside a fixed-height wrapper. Match it to
+	   the shrunken mobile header (44px) so the red bar meets the content box
+	   instead of leaving a background gap below it. */
+	.events-logs-header-wrap {
+		height: 44px;
+	}
+
 	section .section-header h2 {
 		font-size: 20px;
 		white-space: nowrap;

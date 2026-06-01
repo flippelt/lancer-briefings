@@ -1,0 +1,71 @@
+[
+  {
+    "id": "igfa1_pg_ahab_grapple",
+    "name": "IPS-N “Ahab” Grapple/Tether Line",
+    "type": "Gear",
+    "description": "“You ever get the feeling nobody at IPS-N spends any time thinking about the names they give to things? Like, either I don’t read, so I don’t get the reference, or I do and I realize they named a survival tool after a dude who’s famous exclusively for getting dragged to his death tied to a whale.”",
+    "actions": [{
+      "name": "Use Grapple",
+      "activation": "Quick",
+      "detail": "Expend a charge to shoot a hook at a character, object or free space up to Range 5 away from you. You are attached to the hook by a tether, and cannot move or be moved further than five spaces away, unless you teleport, in which case the tether snaps. If the hook moves more than five spaces away, you are dragged along with it. As a quick action, you can reel yourself in, flying to the hook or as close to it as possible. This movement ignores engagement and doesn’t provoke reactions. You can detach from the tether as a full action. You can also retrieve a hook and tether that you are adjacent to as a full action, restoring a charge.",
+      "pilot": true
+    }],
+    "tags": [{
+      "id": "tg_limited",
+      "val": 3
+    }]
+  },
+  {
+    "id": "igfa1_pg_scramble_grenade",
+    "name": "Scramble Grenade",
+    "type": "Gear",
+    "description": "This is a modified short-range distress beacon meant to help search-and-rescue teams locate astronauts who’ve been thrown into space. Some asshole discovered that if you jam a bunch of escape characters into the broadcast signal and overvolt the transmitter, you can make unshielded electronics shit themselves. It fries itself after a few seconds, a fate many wrenchies have wished upon its inventor. Expend a charge for the following effect:<ul><li><b>Scramble Grenade</b> (Grenade, Range 5, Blast 1): Affected characters without the Biological tag must succeed on a Systems save against 10 + your Grit or become Jammed until the end of their next turn.</li></ul>",
+    "actions": [{
+      "name": "Use Scramble Grenade",
+      "activation": "Quick",
+      "range": [{
+          "type": "Range",
+          "val": 5
+        },
+        {
+          "type": "Blast",
+          "val": 1
+        }
+      ],
+      "detail": "Throw a grenade within Range 5. Affected characters without the Biological tag must succeed on a Systems save against 10 + your Grit or become Jammed until the end of their next turn.",
+      "pilot": true
+    }],
+    "tags": [{
+        "id": "tg_limited",
+        "val": 1
+      },
+      {
+        "id": "tg_grenade"
+      }
+    ]
+  },
+  {
+    "id": "igfa1_pg_portable_power_supply",
+    "name": "Portable Power Supply",
+    "type": "Gear",
+    "description": "Slightly larger than a briefcase, this device contains a fuel cell capable of generating enough electricity to run a family house for several days, or a moderate number of personal appliances indefinitely. On Hell’s Gate, wrenchies often carry one of these to provide power to computers or machinery in areas of the station that have been cut off from the main grid.<pg>It can’t generate enough power to run a mech’s weapons or motive systems, but it can keep the main computer, comms and life support running."
+  },
+  {
+    "id": "igfa1_pg_sylphlex",
+    "name": "Sylphlex",
+    "type": "Gear",
+    "description": "An example of outlander ingenuity, the Sylphlex was a successful attempt to merge the features of an SSC Sylph Undersuit and a flexsuit into a single unit. This provides a base-layer suit that recycles air and water, deals with waste products, cleans the user, maintains a supply of nutritional paste and seals against external atmosphere, allowing a user to wear a hardsuit comfortably for days or weeks without having to remove it; essential for long journeys.<br>Given that the Sylphlex suit is an unauthorized modification of its proprietary technology, SSC briefly considered legal action, but their local office convinced them that suing a group of impoverished Long Rim residents would be a PR disaster. Instead, they granted outlanders the exclusive right to manufacture Sylphlex suits in Calliope, while SSC retains rights to the product elsewhere in the galaxy."
+  },
+  {
+    "id": "igfa1_pg_headache",
+    "name": "Headache",
+    "type": "Gear",
+    "description": "Headache is a lesson in how outlanders describe things: bluntly. It’s a volatile liquid that’s usually a clear golden-brown color. Few know what it’s made from and the rest know better than to ask. It’s 100 proof at the very least, so it can disinfect wounds, degrease the moving parts of your mech, act as an accelerant and if you’re very, very brave you can even try drinking it – but take note of the name."
+  },
+  {
+    "id": "igfa1_pg_the_soup",
+    "name": "The Soup",
+    "type": "Gear",
+    "description": "Outlanders, particularly nomads, often have to keep their hardsuits on for days or weeks. A Sylphlex provides an edible paste that contains the essentials, but it’s like eating packing foam. To address this problem, outlanders created “the Soup” – a nutrient-rich liquid that comes in a variety of flavors and can be drank via a standard hardsuit port. The flavors are named only as colors; cinnabar, ochre and saffron are favorites, while fern is an acquired taste. Stay away from ultramarine."
+  }
+]

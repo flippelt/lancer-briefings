@@ -438,6 +438,15 @@ section.section-container#events-logs .rhombus-back {
 	left: -2em;
 }
 
+/* Fixed-height wrapper that clips the decorative rhombus-back tucked
+   behind the EVENT LOG header. Height matches the desktop section-header
+   (52px); the mobile breakpoint shrinks it to the mobile header height so
+   no background gap opens up between the bar and the content box. */
+.events-logs-header-wrap {
+	height: 52px;
+	overflow: hidden;
+}
+
 .event-list-container {
 	height: 666px;
 }

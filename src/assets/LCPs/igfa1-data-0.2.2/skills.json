@@ -1,0 +1,51 @@
+[
+  {
+    "id": "igfa1_sk_jury_rig",
+    "name": "JURY RIG",
+    "description": "Make something broken work a little while longer.",
+    "detail": "Make something broken work a little while longer; improvise a quick solution with limited materials; use ingenuity to avert disaster. This skill implies that you don’t have the necessary expertise, tools or materials to do the job properly and to code. Whatever fix you apply won’t last long, but it’ll be better than nothing.",
+    "family": "dex"
+  },
+  {
+    "id": "igfa1_sk_hack_or_finesse",
+    "name": "HACK OR FINESSE",
+    "description": "Make technology do something it’s not supposed to.",
+    "detail": "Make technology do something it’s not supposed to; exploit weaknesses in design or implementation; break into secure systems; see things you shouldn’t; override safety features or failsafes; modify or sabotage in ways that are hard to detect.",
+    "family": "int"
+  },
+  {
+    "id": "igfa1_sk_repair_and_maintain",
+    "name": "REPAIR AND MAINTAIN",
+    "description": "Keep something working, or restore proper functionality to something that’s not.",
+    "detail": "Keep something working, or restore proper functionality to something that’s not; ensure a piece of equipment is clean, reliable and safe to use; fix something the correct way. This skill implies you have the expertise, tools and materials to do a job the way it’s meant to be done.",
+    "family": "int"
+  },
+  {
+    "id": "igfa1_sk_attune_to_the_world",
+    "name": "ATTUNE TO THE WORLD",
+    "description": "Let your surroundings speak to you.",
+    "detail": "Let your surroundings speak to you; see the method in the madness; perceive hidden patterns; work out what doesn’t fit; know things you can’t quite explain; sneak a glimpse of the bigger picture.",
+    "family": "dex"
+  },
+  {
+    "id": "igfa1_sk_conceptualize",
+    "name": "CONCEPTUALIZE",
+    "description": "Exercise imagination and derive meaning.",
+    "detail": "Exercise imagination; derive meaning; comprehend forms; see something from a different perspective; draw connections; think outside the box; create and communicate ideas; recognize artistic intent and purpose. Useful in any job, vital for artists.",
+    "family": "dex"
+  },
+  {
+    "id": "igfa1_sk_deceive",
+    "name": "DECEIVE",
+    "description": "Say things contrary to established fact.",
+    "detail": "Say things contrary to established fact; commit false report; speak untruths; verify unjust things; converse in bad faith; dissemble; mislead; conceal your intentions; equivocate; prevaricate; spin yarns; in short, lie.",
+    "family": "dex"
+  },
+  {
+    "id": "sk_push_boundaries",
+    "name": "PUSH BOUNDARIES",
+    "description": "Get what you want by being a dick about it.",
+    "detail": "Get what you want by being a dick about it; break the rules; skirt regulations; disregard procedure; ignore the chain of command; exploit loopholes; obey the letter of the law while mocking its spirit; comply in a malicious manner; take advantage.",
+    "family": "cha"
+  }
+]
