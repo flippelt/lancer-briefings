@@ -30,7 +30,7 @@ Chart.defaults.animation = {
 Chart.defaults.plugins.filler;
 
 import { computed, defineComponent, ref, reactive } from "vue";
-import { DoughnutChart } from "vue-chart-3";
+import DoughnutChart from "./DoughnutChart.vue";
 
 export default defineComponent({
 	name: "Burden",
