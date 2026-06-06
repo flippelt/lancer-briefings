@@ -4,10 +4,17 @@
 
 **[Live Demo](https://lancer.kuenaimaku.com/)**
 
-Go over mission briefings within the LANCER Universe in style by showing your players a fully animated mission briefing screen, with a Mirrorsmoke Mercenary Company theme.
+Briefings de missão estilizados pro LANCER RPG: tela animada com tema Mirrorsmoke Mercenary Company, vistas de Status / Pilotos / Pelotões / Logs e PWA pra mostrar pros jogadores na mesa.
+
+## Sobre este projeto
+
+Este repositório foi originalmente um fork de [Kuenaimaku/lancer-briefings](https://github.com/Kuenaimaku/lancer-briefings) (o "Lancer Briefings" original do Kuenaimaku), mas evoluiu o bastante desde então (suite de testes, mobile drawer, squad roster, integração CompCon expandida, novos componentes) e por isso foi removido da rede de forks do GitHub.
+
+**O design, a estrutura e o trabalho original são do Kuenaimaku** — esta versão é uma evolução de uso pessoal sobre a base dele. Se você quer a versão upstream com o escopo original, vá pra [Kuenaimaku/lancer-briefings](https://github.com/Kuenaimaku/lancer-briefings).
 
 ## Credits
 
+- **[Kuenaimaku/lancer-briefings](https://github.com/Kuenaimaku/lancer-briefings)** — projeto original sobre o qual este é baseado.
 - Alkyama#2737 (discord) for the original [Figma Template](figma.com/community/file/983540597915480981) used as reference.
 - [VantaJS](https://www.vantajs.com/) for the slick 3d openGL backgrounds.
 
