@@ -413,4 +413,55 @@ export default {
 	font-size: 12px;
 	font-family: "Inconsolata", "Courier New", monospace;
 }
+
+/* Mobile tuning — bate com o breakpoint ≤767px usado pelo _responsive.css
+   global. Reduz padding/fonte pra caber em telas estreitas (≤360px é o
+   piso real que tem que servir) sem espremer o conteúdo. */
+@media (max-width: 767px) {
+	.boot {
+		letter-spacing: 0.05em;
+	}
+	.monitor {
+		width: 96vw;
+		border-radius: 10px;
+	}
+	.hdr {
+		padding: 10px 12px;
+		gap: 8px;
+	}
+	.title {
+		font-size: 11px;
+		letter-spacing: 0.08em;
+	}
+	.body {
+		padding: 18px 14px 16px;
+		min-height: 200px;
+	}
+	.txt {
+		font-size: 13px;
+		line-height: 1.6;
+	}
+	.flavor {
+		max-height: 92px;
+	}
+	.small {
+		font-size: 11px;
+	}
+	.ftr {
+		padding: 8px 12px;
+		font-size: 11px;
+		gap: 6px;
+	}
+}
+
+/* Telas muito baixas (landscape de celular). Sem o min-height alto, o
+   monitor centraliza melhor e o flavor consegue rolar dentro do viewport. */
+@media (max-height: 520px) {
+	.body {
+		min-height: 0;
+	}
+	.flavor {
+		max-height: 70px;
+	}
+}
 </style>
