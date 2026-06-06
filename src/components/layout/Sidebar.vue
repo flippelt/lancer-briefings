@@ -29,6 +29,10 @@
 					<i class="filter-icon" style="--icon-url: url('/icons/pilot.svg')"></i>
 					<span>Pilotos</span>
 				</router-link>
+				<router-link class="clipped-bottom-right" to="/squads" @click="close">
+					<i class="filter-icon" style="--icon-url: url('/icons/squad.svg')"></i>
+					<span>Pelotões</span>
+				</router-link>
 				<router-link class="clipped-bottom-right" to="/events" @click="close">
 					<i class="filter-icon" style="--icon-url: url('/icons/events.svg')"></i>
 					<span>Logs</span>
