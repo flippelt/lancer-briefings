@@ -26,6 +26,13 @@ const routes = [
 		meta: { title: `${DEFAULT_TITLE} PILOT ROSTER` },
 	},
 	{
+		path: "/squads",
+		name: "Squads",
+		component: () => import("@/views/SquadsView.vue"),
+		props: true,
+		meta: { title: `${DEFAULT_TITLE} SQUAD ROSTER` },
+	},
+	{
 		path: "/events",
 		name: "Events",
 		component: () => import("@/views/EventsView.vue"),
