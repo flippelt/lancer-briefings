@@ -15,5 +15,7 @@
     "subheaderTitle": "Time de Resposta Rápida",
     "subheaderSubtitle": "Bad Juju"
   },
-  "pilotSpecialInfo": {}
+  "pilotSpecialInfo": {
+    "PROFESSOR": { "squad": "BAD JUJU" }
+  }
 }
