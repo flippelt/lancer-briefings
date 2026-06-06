@@ -1,4 +1,9 @@
 <template>
+	<BootScreen
+		v-if="showBootScreen"
+		:theme-key="themePrefs.theme"
+		@done="onBootDone"
+	/>
 	<div class="page-wrapper">
 		<Header :planet-path="planetPath" :class="{ animate: animate }" :header="header" />
 		<Sidebar :animate="animate" :class="{ animate: animate }" @open-settings="openSettings" />
@@ -24,6 +29,7 @@
 </template>
 
 <script>
+import BootScreen from "./components/BootScreen.vue";
 import Header from "./components/layout/Header.vue";
 import Sidebar from "./components/layout/Sidebar.vue";
 import SettingsModal from "./components/modals/SettingsModal.vue";
@@ -63,6 +69,7 @@ function buildVantaConfig({ theme, mode }) {
 
 export default {
 	components: {
+		BootScreen,
 		Header,
 		Sidebar,
 	},
@@ -75,6 +82,9 @@ export default {
 			header: Config.header,
 			pilotSpecialInfo: Config.pilotSpecialInfo,
 			themePrefs: this.loadThemePrefs(),
+			// Boot screen runs on first load. Set `bootScreen: false` in
+			// general-config.json to skip it.
+			showBootScreen: Config.bootScreen !== false,
 			vantaEffect: null,
 			clocks: [],
 			events: [],
@@ -176,6 +186,9 @@ export default {
 			if (window.VANTA && window.VANTA.GLOBE) {
 				this.vantaEffect = window.VANTA.GLOBE(buildVantaConfig(prefs));
 			}
+		},
+		onBootDone() {
+			this.showBootScreen = false;
 		},
 		openSettings() {
 			this.$oruga.modal.open({
