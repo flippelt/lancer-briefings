@@ -678,6 +678,19 @@ body > canvas {
 		box-sizing: border-box;
 	}
 
+	/* Reservas e Contadores: largura cheia (empilhados), iguais aos painéis de
+	   cima. O wrapper <div> herdava flex-row (50%/50%); aqui ele empilha e os
+	   painéis recebem flex-basis 100% (senão o flex-basis vence o width:100%). */
+	#status > div {
+		flex-direction: column !important;
+		margin: 0 !important;
+	}
+
+	section.section-container#reserves,
+	section.section-container#clocks {
+		flex: 1 1 100% !important;
+	}
+
 	section .section-header {
 		display: flex;
 		width: 100%;

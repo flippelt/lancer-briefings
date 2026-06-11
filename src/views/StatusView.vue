@@ -37,7 +37,7 @@
 		<section id="clocks" class="section-container" :style="{ 'animation-delay': animationDelay }">
 			<div class="section-header clipped-medium-backward">
 				<i class="filter-icon" style="--icon-url: url('/icons/protocol.svg')"></i>
-				<h2>Clocks</h2>
+				<h2>Contadores</h2>
 			</div>
 			<div class="section-content-container">
 				<div class="clocks-list-container">
