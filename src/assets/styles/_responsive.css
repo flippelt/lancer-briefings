@@ -287,12 +287,16 @@ body > canvas {
 	/* Status view: 4 sections wrap into columns */
 	#status.content-container {
 		flex-wrap: wrap;
+		/* coluna: estica os filhos (o wrapper de reservas/clocks senão encolhe
+		   à esquerda por causa do align-items:flex-start herdado do ≤1599) */
+		align-items: stretch;
 	}
 
 	#status > div {
 		flex-direction: column;
 		margin: 0;
 		gap: 0;
+		width: 100%;
 	}
 
 	section.section-container,
@@ -661,6 +665,7 @@ body > canvas {
 	/* --- Content rows stack vertically --- */
 	.content-container {
 		flex-direction: column !important;
+		align-items: stretch !important;
 	}
 
 	section.section-container,
@@ -684,6 +689,7 @@ body > canvas {
 	#status > div {
 		flex-direction: column !important;
 		margin: 0 !important;
+		width: 100% !important;
 	}
 
 	section.section-container#reserves,
