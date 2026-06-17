@@ -1351,7 +1351,7 @@ section .section-header h2 {
 }
 
 .person-list-container .person {
-	border-bottom: var(--primary 1px solid);
+	border-bottom: 1px solid var(--primary-color);
 }
 
 .person-list-container .person:last-child {
