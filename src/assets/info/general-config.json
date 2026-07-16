@@ -5,17 +5,15 @@
   "defaultTitle": "UN |",
   "icon": "/faction-logos/union-white.svg",
   "header": {
-    "planet": "Hercynia",
-    "year": "5014u",
-    "system": "Ardennes-3",
-    "gate": "Atlas-Quanoukrim",
-    "ring": "Atlas",
+    "planet": "Cressidium",
+    "year": "5016u",
+    "system": "Linha Cascatas",
+    "gate": "Nova Elísia",
+    "ring": "AEL",
     "headerTitle": "Departamento Naval da União",
-    "headerSubtitle": "",
-    "subheaderTitle": "Time de Resposta Rápida",
-    "subheaderSubtitle": "Bad Juju"
+    "headerSubtitle": "NMU-PN Rio Grande",
+    "subheaderTitle": "Esquadrão",
+    "subheaderSubtitle": "Rei Pescador"
   },
-  "pilotSpecialInfo": {
-    "PROFESSOR": { "squad": "BAD JUJU" }
-  }
+  "pilotSpecialInfo": {}
 }
