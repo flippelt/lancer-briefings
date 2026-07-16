@@ -491,6 +491,32 @@ body > canvas {
 }
 
 /* ============================================
+   EventsView dead zone (1200–1322px)
+   The desktop side-by-side needs events (393) + margins (60) +
+   events-logs (min 600) + margins (180) + sidebar (90) = 1323px to
+   fit. #router-view-container is absolutely positioned (left: 90px,
+   no width), so below 1323px the min-width:600 log overflows the
+   viewport with no scroll. The ≤1199 stacking rule doesn't reach here,
+   so stack the two panels in this band too — width is viewport-based
+   because the absolute parent has no width to take 100% from.
+   ============================================ */
+@media (min-width: 1200px) and (max-width: 1322px) {
+	#eventsView.content-container {
+		flex-direction: column;
+	}
+
+	section.section-container#events,
+	section.section-container#events-logs {
+		width: calc(100vw - 90px - 40px);
+		max-width: calc(100vw - 90px - 40px);
+		min-width: 0;
+		margin: 20px;
+		height: auto;
+		box-sizing: border-box;
+	}
+}
+
+/* ============================================
    MOBILE (max 767px)
    Full reflow: horizontal sidebar, stacked everything
    ============================================ */
