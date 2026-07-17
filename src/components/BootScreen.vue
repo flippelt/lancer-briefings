@@ -104,10 +104,13 @@ export default {
 				this.timer = null;
 			}
 
+			// Keep the dismissal snappy: the fade starts almost immediately and
+			// `.exiting` turns off pointer-events, so the menu behind becomes
+			// clickable right away instead of ~1.4s later.
 			window.setTimeout(() => {
 				this.exiting = true;
-				window.setTimeout(() => this.$emit("done"), 520);
-			}, 850);
+				window.setTimeout(() => this.$emit("done"), 350);
+			}, 400);
 		},
 
 		startTyping() {
@@ -204,7 +207,7 @@ export default {
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	opacity: 1;
-	transition: opacity 520ms ease;
+	transition: opacity 350ms ease;
 	outline: none;
 }
 
