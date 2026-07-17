@@ -34,7 +34,7 @@ body > canvas {
    ALL VIEWPORTS < 1600px
    Allow vertical scroll, prevent horizontal overflow
    ============================================ */
-@media (max-width: 1599px) {
+@media (max-width: 1919px) {
 	#app {
 		overflow-x: hidden !important;
 		overflow-y: auto !important;
@@ -103,11 +103,15 @@ body > canvas {
 }
 
 /* ============================================
-   SMALL DESKTOP (1024px – 1599px)
-   Scale wide sections + wrap StatusView so iPad Pro
-   (1024 portrait / 1366 landscape) doesn't hide modules
+   SMALL DESKTOP (1024px – 1919px)
+   Scale wide sections + wrap StatusView so laptops/iPad Pro
+   (1024 portrait / 1366 landscape / 1680 HiDPI) don't overflow.
+   The fixed-width base layout only fits at ≥1920px (events row
+   needs ~1902px); below that, #router-view-container is absolutely
+   positioned with no width, so the fixed columns run off the
+   viewport. Keep the flexible/wrapping layout up to 1919px.
    ============================================ */
-@media (max-width: 1599px) {
+@media (max-width: 1919px) {
 	section.section-container#pilots {
 		width: calc(100vw - 90px - 60px);
 		max-width: 1755px;
