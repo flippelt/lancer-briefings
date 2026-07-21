@@ -1540,6 +1540,18 @@ div.markdown p {
 	margin: 1em 0;
 }
 
+/* Inline art dropped into mission/event bodies (NPC portraits, recon
+   shots). Never wider than the column; framed to match the section
+   chrome. Portrait cutouts from the book come on flat dark plates, so
+   the frame reads as a dossier photo. */
+div.markdown img {
+	display: block;
+	max-width: min(360px, 100%);
+	height: auto;
+	margin: 1em auto;
+	border: 1px solid var(--primary-color);
+}
+
 div.markdown hr {
 	border-color: var(--primary-color);
 }
