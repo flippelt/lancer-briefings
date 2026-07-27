@@ -47,7 +47,10 @@
       </div>
     </div>
   </div>
-  <div class="mech-modal portrait">
+  <!-- Pilots with no mech on record have no /mechs/<CALLSIGN>.webp, and an
+       empty panel reads as a broken page rather than an empty record — drop
+       the whole panel when the art fails to load. -->
+  <div v-if="!mechArtMissing" class="mech-modal portrait">
     <div class="mech-header-container">
       <div class="section-header clipped-medium-backward-mech">
         <i class="filter-icon" style="--icon-url: url('/icons/mech.svg')"></i>
@@ -58,7 +61,7 @@
       </div>
     </div>
     <div class="mech">
-      <img :src="mechPortrait" class="portrait" loading="lazy" decoding="async">
+      <img :src="mechPortrait" class="portrait" loading="lazy" decoding="async" @error="mechArtMissing = true">
     </div>
   </div>
 </template>
@@ -101,6 +104,7 @@ export default {
       flexMounts: [],
       heavyMounts: [],
       mechSystems: [],
+      mechArtMissing: false,
       swipeDotsCleanup: null,
     }
   },

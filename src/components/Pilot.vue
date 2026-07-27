@@ -121,11 +121,23 @@ export default {
       if (mech) {
         this.activeMech = mech
       }
+      else if (this.pilot.mechs[0]) {
+        this.activeMech = this.pilot.mechs[0]
+      }
       else {
-        // default to missing frame in case pilot has no mechs
-        this.pilot.mechs[0]
-          ? this.activeMech = this.pilot.mechs[0]
-          : lancerData.frames.find((obj) => obj.id === 'missing_frame')
+        // A pilot with no mech on record (fresh LL0 export) still renders the
+        // blueprint button, so give it a stand-in: missing_frame resolves to
+        // "ERR: DATA NOT FOUND" below, and the name has to be a string because
+        // PilotModalButtons calls .toUpperCase() on it.
+        this.activeMech = {
+          frame: 'missing_frame',
+          name: 'no mech on record',
+          // MechModal reads loadouts[active_loadout_index] then walks its
+          // mounts/systems unguarded; an empty loadout lets it render its
+          // "ERR: NO SYSTEMS FOUND" state instead of throwing.
+          active_loadout_index: 0,
+          loadouts: [{ mounts: [], systems: [] }],
+        }
       }
 
       let frame = this.frames.find((obj) => obj.id === this.activeMech.frame)
