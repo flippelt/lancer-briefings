@@ -39,5 +39,10 @@
 	},
 	"optionalDependencies": {
 		"esbuild-linux-64": "^0.15.5"
+	},
+	"overrides": {
+		"workbox-build": {
+			"glob": "^14.0.2"
+		}
 	}
 }
